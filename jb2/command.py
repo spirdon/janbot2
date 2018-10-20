@@ -9,8 +9,11 @@ class Command:
         pass
 
     async def process(self, connector, message, client):
-        msg = message.content.strip().lower()
+        msg = message.content
         jb2_server = connector.get_server(message.server.id)
+        prefix = jb2_server['prefix']
 
-        if re.match(jb2_server.prefix + self.get_pattern(), msg) is not None:
+        if re.match("^" + prefix + self.get_pattern(), msg) is not None:
+            start_index = len(prefix)
+            message.content = message.content[start_index:]
             await self.action(connector, message, client)

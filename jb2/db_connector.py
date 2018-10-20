@@ -41,6 +41,9 @@ class DatabaseConnector:
             lines = f.readlines()
         
         query = ' '.join(lines)
+
+        print("** Execute query:\n" + query.strip())
+
         self.cursor.execute(query, args)
 
     def create_tables(self):
@@ -60,15 +63,21 @@ class DatabaseConnector:
                                             (server_id,))
             self.conn.commit()
             print("** Added server to database")
-            return Server(server_id)
+
+            return {
+                'server_id': server_id,
+                'prefix': 'jb2_'
+            }
 
         row = rows[0]
         print("** Found server")
 
-        return Server(row[0], row[1])
+        return {
+            'server_id': row[0],
+            'prefix': row[1]
+        }
 
-
-class Server:
-    def __init__(self, server_id, prefix='jb2_'):
-        self.server_id = server_id
-        self.prefix = prefix
+    def set_server_prefix(self, server_id, prefix):
+        self.execute_sql_file_with_args('query/set_server_prefix.sql',
+                                        (prefix, server_id))
+        self.conn.commit()
