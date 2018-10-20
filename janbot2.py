@@ -10,8 +10,8 @@ async def on_ready():
 def main():
     try:
         CLIENT.run(os.getenv('TOKEN'))
-    except Exception as e:
-        print("Exception: " + str(e))
+    except Exception as exception:
+        print("Exception: " + str(exception))
 
 if __name__ == "__main__":
     main()
