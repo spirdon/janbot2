@@ -1,16 +1,15 @@
+import jb2.client
 import os
-import discord
-from discord.ext import commands
 
-client = discord.Client()
+CLIENT = jb2.client.client
 
-@client.event
+@CLIENT.event
 async def on_ready():
-    print("Zalogowano jako " + str(bot.user))
+    print("Zalogowano jako " + str(CLIENT.user))
 
 def main():
     try:
-        client.run(os.getenv('TOKEN'))
+        CLIENT.run(os.getenv('TOKEN'))
     except Exception as e:
         print("Exception: " + str(e))
 
