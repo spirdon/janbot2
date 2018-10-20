@@ -3,9 +3,14 @@ import os
 import jb2.client
 import jb2.db_connector
 
+import jb2.comm_prefix
+
+
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
-commands = () # TODO fill with commands!
+commands = (
+    jb2.comm_prefix.PrefixCommand(),
+)
 
 
 @client.event
@@ -29,11 +34,9 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    jb2_server = connector.get_server(message.server.id)
-
     # Process all commands (run them if regex is ok)
     for command in commands:
-        await command.process(jb2_server, message, client)
+        await command.process(connector, message, client)
 
 
 def main():

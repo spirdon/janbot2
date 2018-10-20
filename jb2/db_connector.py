@@ -69,6 +69,6 @@ class DatabaseConnector:
 
 
 class Server:
-    def __init__(self, server_id, prefix='jb2 '):
+    def __init__(self, server_id, prefix='jb2_'):
         self.server_id = server_id
         self.prefix = prefix

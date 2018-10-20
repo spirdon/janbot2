@@ -1,1 +1,1 @@
-INSERT INTO servers VALUES(%s, 'jb2 ');
+INSERT INTO servers VALUES(%s, 'jb2_');
