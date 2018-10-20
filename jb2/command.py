@@ -11,8 +11,8 @@ class Command:
     async def action(self, message, client):
         pass
 
-    async def process(self, prefix, message, client):
+    async def process(self, jb2_server, message, client):
         msg = message.content.strip().lower()
 
-        if re.match(prefix + self.get_pattern(), msg) is not None:
+        if re.match(jb2_server.prefix + self.get_pattern(), msg) is not None:
             await self.action(message, client)
