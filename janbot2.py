@@ -1,15 +1,28 @@
 import jb2.client
 import os
 
-CLIENT = jb2.client.client
+client = jb2.client.client
+commands = () # TODO fill with commands!
 
-@CLIENT.event
+
+@client.event
 async def on_ready():
-    print("Zalogowano jako " + str(CLIENT.user))
+    print("Logged in as: " + str(client.user))
+
+
+@client.event
+async def on_message(message):
+    # Omit bot responses
+    if message.author.bot:
+        return
+
+    for command in commands:
+        await command.process(message, client)
+
 
 def main():
     try:
-        CLIENT.run(os.getenv('TOKEN'))
+        client.run(os.getenv('TOKEN'))
     except Exception as exception:
         print("Exception: " + str(exception))
 
