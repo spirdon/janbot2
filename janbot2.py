@@ -1,6 +1,7 @@
+import os
+
 import jb2.client
 import jb2.db_connector
-import os
 
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
