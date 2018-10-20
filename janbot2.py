@@ -1,6 +1,5 @@
 import jb2.client
 import jb2.db_connector
-import jb2.server
 import os
 
 client = jb2.client.client

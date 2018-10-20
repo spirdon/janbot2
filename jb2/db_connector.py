@@ -49,7 +49,7 @@ class DatabaseConnector:
         self.conn.commit()
 
     def get_server(self, server_id):
-        print("* Looking for server ({})")
+        print("* Looking for server ({})".format(server_id))
         self.execute_sql_file_with_args('query/find_server.sql', (server_id,))
         rows = self.cursor.fetchall()
 
@@ -58,7 +58,8 @@ class DatabaseConnector:
             print("** Adding server to database")
             self.execute_sql_file_with_args('query/create_server.sql',
                                             (server_id,))
-            print("** Added server")
+            self.conn.commit()
+            print("** Added server to database")
             return Server(server_id)
 
         row = rows[0]
