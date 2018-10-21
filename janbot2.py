@@ -14,6 +14,7 @@ import jb2.text.ask
 import jb2.text.elo
 import jb2.text.przondlo
 import jb2.text.szkaluje
+import jb2.text.ufnal
 #import jb2.video.comm_cenzovid # doesn't work well
 
 
@@ -29,7 +30,8 @@ commands = (
     jb2.text.ask.AskCommand(),
     jb2.text.elo.EloCommand(),
     jb2.text.przondlo.PrzondloCommand(),
-    jb2.text.szkaluje.SzkalujeCommand()
+    jb2.text.szkaluje.SzkalujeCommand(),
+    jb2.text.ufnal.UfnalCommand()
 )
 
 

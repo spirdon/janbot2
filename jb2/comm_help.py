@@ -53,6 +53,9 @@ class HelpCommand(jb2.command.Command):
 
                 **`{0}przondlo <text>`** - zmiana tekstu na bełkot
                 `text` - tekst, który ma zostać zmieniony na przondłomowę
+
+                **`{0}szkaluj <nick>`** - wyzywa adresata w wyrafinowany sposób
+                `nick` - nick szkalowanej osoby
                 """.format(prefix)
             elif group == "image":
                 emb = discord.Embed()
