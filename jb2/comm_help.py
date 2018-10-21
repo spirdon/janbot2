@@ -61,7 +61,7 @@ class HelpCommand(jb2.command.Command):
                 emb.description = """
                     **`{0}ankieta <question>: <options>`** - postuje ankietę
                     `question` - pytanie (musi po nim być dwukropek)
-                    `options` - pytania oddzielone znakiem plusa (+)
+                    `options` - odpowiedzi oddzielone znakiem plusa (+)
                 """.format(prefix)
             else:
                 text = "Nieznana grupa komend"

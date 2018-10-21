@@ -8,6 +8,7 @@ import jb2.comm_ask
 import jb2.comm_dziadzius
 import jb2.comm_elo
 import jb2.comm_help
+import jb2.comm_papiezify
 import jb2.comm_prefix
 import jb2.comm_przondlo
 
@@ -20,6 +21,7 @@ commands = (
     jb2.comm_dziadzius.DziadusCommand(),
     jb2.comm_elo.EloCommand(),
     jb2.comm_help.HelpCommand(),
+    jb2.comm_papiezify.PapiezifyCommand(),
     jb2.comm_prefix.PrefixCommand(),
     jb2.comm_przondlo.PrzondloCommand()
 )
