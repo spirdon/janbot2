@@ -14,8 +14,8 @@ class Command:
         prefix = jb2_server['prefix']
         start_index = len(prefix)
 
-        if prefix in ['$', '^']:
-            prefix = '\\' + prefix
+        prefix = prefix.replace('$', '\\$')
+        prefix = prefix.replace('^', '\\^')
 
         # print("^" + prefix + self.get_pattern(), msg)
 
