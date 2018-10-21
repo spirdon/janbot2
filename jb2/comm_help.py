@@ -16,8 +16,6 @@ class HelpCommand(jb2.command.Command):
 
         prefix = connector.get_server(message.server.id)['prefix']
 
-        print("^" + pattern, msg)
-
         group = re.match("^" + pattern, msg).group(1)
 
         if group is None:

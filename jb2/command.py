@@ -22,8 +22,6 @@ class Command:
                        .replace(')', '\\)')\
                        .replace('.', '\\.')
 
-        # print("^" + prefix + self.get_pattern(), msg)
-
         if re.match("^" + prefix + self.get_pattern(), msg) is not None:
             message.content = message.content[start_index:]
             await self.action(connector, message, client)
