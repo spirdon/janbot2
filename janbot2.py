@@ -52,9 +52,12 @@ async def on_message(message):
     if message.author.bot:
         return
 
+    # Get server prefix
+    prefix = connector.get_server(message.server.id)['prefix']
+
     # Process all commands (run them if regex is ok)
     for command in commands:
-        await command.process(connector, message, client)
+        await command.process(prefix, connector, message, client)
 
 
 def main():
