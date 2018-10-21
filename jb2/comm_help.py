@@ -54,6 +54,9 @@ class HelpCommand(jb2.command.Command):
                 emb.title = ":camera_with_flash: Obrazki - Komendy"
                 emb.description = """
                     **`{0}dziadzius`** - postuje losowego dziadziusia
+
+                    **`{0}papiezify <url>`** - wstawia mordę/-y papieża na twarze
+                    `url` - adres URL obrazka
                 """.format(prefix)
             elif group == "misc":
                 emb = discord.Embed()
