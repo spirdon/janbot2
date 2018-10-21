@@ -16,6 +16,11 @@ class Command:
 
         prefix = prefix.replace('$', '\\$')
         prefix = prefix.replace('^', '\\^')
+        prefix = prefix.replace('[', '\\[')
+        prefix = prefix.replace(']', '\\]')
+        prefix = prefix.replace('(', '\\(')
+        prefix = prefix.replace(')', '\\)')
+        prefix = prefix.replace('.', '\\.')
 
         # print("^" + prefix + self.get_pattern(), msg)
 
