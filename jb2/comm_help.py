@@ -20,6 +20,8 @@ class HelpCommand(jb2.command.Command):
 
         if group is None:
             emb = discord.Embed()
+            emb.title = "Jan Bot 2"
+            emb.description = "Polski bot memiczny."
             emb.add_field(name=":hammer: Moderacja",
                           value="`{}help moderation`".format(prefix))
         else:
