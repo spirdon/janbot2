@@ -38,7 +38,7 @@ class PrzondloCommand(jb2.command.Command):
             'y': 'uythg',
             'u': 'iuyjkh',
             'i': 'ioukjl',
-            'o': 'ipokl;',
+            'o': 'ipokl',
             'p': 'pol',
             'a': 'qasz',
             's': 'wsadx',
