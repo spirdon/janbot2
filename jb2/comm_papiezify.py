@@ -21,11 +21,7 @@ class PapiezifyCommand(jb2.command.Command):
         pattern = self.get_pattern()
         emb = discord.Embed()
 
-        print(["^" + pattern, msg])
-
         url = re.match("^" + pattern, msg).group(1)
-        print([url])
-        print(url == '')
 
         if url is None or url == '':
             if message.attachments == []:
