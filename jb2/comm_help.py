@@ -35,15 +35,17 @@ class HelpCommand(jb2.command.Command):
                 emb = discord.Embed()
                 emb.title = ":gear: Ustawienia - Komendy"
                 emb.description = """
-                    **`{0}prefix <pfx>`**
+                    **`{0}prefix <pfx>`** - wyświetlenie/zmiana prefiksu
                     `pfx` - nowy prefiks składający się z 1-4 znaków
                 """.format(prefix)
             elif group == "text":
                 emb = discord.Embed()
                 emb.title = ":pencil2: Tekst - Komendy"
                 emb.description = """
-                    **`{0}przondlo <text>`**
+                    **`{0}przondlo <text>`** - zmiana tekstu na bełkot
                     `text` - tekst, który ma zostać zmieniony na przondłomowę
+
+                    **`{0}elo`** - losowe przywitanie
                 """.format(prefix)
             else:
                 text = "Nieznana grupa komend"
