@@ -1,6 +1,7 @@
 import random
 import re
-import urllib.request
+import shutil
+import requests
 import cv2
 import discord
 
@@ -33,7 +34,17 @@ class PapiezifyCommand(jb2.command.Command):
             cascadePath = 'res/xml/haarcascade_frontalface_default.xml'
 
             try:
-                urllib.request.urlretrieve(url, full_path)
+                r = requests.get(url, stream=True)
+                if r.status_code == 200:
+                    with open(full_path, 'wb') as f:
+                        r.raw.decode_content = True
+                        shutil.copyfileobj(r.raw, f)
+                else:
+                    text = "Nie można było pobrać obrazka"
+                    emb = jb2.embed.error_embed(author_m, text)
+                    await client.send_message(message.channel, embed=emb)
+                    raise Exception
+
                 img = cv2.imread(full_path, cv2.IMREAD_UNCHANGED)
                 face_cascade = cv2.CascadeClassifier(cascadePath)
                 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -46,8 +57,8 @@ class PapiezifyCommand(jb2.command.Command):
                 )
                 for (x, y, w, h) in faces:
                     img = cv2.imread(full_path, cv2.IMREAD_UNCHANGED)
-                    x_o = int(0.1 * w)
-                    y_o = int(0.1 * h)
+                    x_o = int(0.15 * w)
+                    y_o = int(0.2 * h)
 
                     image = Image.open(full_path)
                     papaj = Image.open(papaj_path)
@@ -64,4 +75,5 @@ class PapiezifyCommand(jb2.command.Command):
                 text = "Nieprawidłowy URL"
                 emb = jb2.embed.error_embed(author_m, text)
                 await client.send_message(message.channel, embed=emb)
+
 
