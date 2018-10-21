@@ -12,6 +12,11 @@ def success_embed(mention, text):
     return embed(emoji, mention, text)
 
 
+def warning_embed(mention, text):
+    emoji = ":warning:"
+    return embed(emoji, mention, text)
+
+
 def error_embed(mention, text):
     emoji = ":x:"
     return embed(emoji, mention, text)

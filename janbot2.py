@@ -5,6 +5,7 @@ import jb2.db_connector
 
 import jb2.comm_ankieta
 import jb2.comm_ask
+#import jb2.comm_cenzovid
 import jb2.comm_chajzer
 import jb2.comm_dziadzius
 import jb2.comm_elo
@@ -20,6 +21,7 @@ connector = jb2.db_connector.DatabaseConnector()
 commands = (
     jb2.comm_ankieta.AnkietaCommand(),
     jb2.comm_ask.AskCommand(),
+#    jb2.comm_cenzovid.CenzovidCommand(),
     jb2.comm_chajzer.ChajzerCommand(),
     jb2.comm_dziadzius.DziadusCommand(),
     jb2.comm_elo.EloCommand(),

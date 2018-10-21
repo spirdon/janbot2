@@ -64,7 +64,6 @@ class PapiezifyCommand(jb2.command.Command):
                 flags=cv2.CASCADE_SCALE_IMAGE
             )
             for (x, y, w, h) in faces:
-                img = cv2.imread(full_path, cv2.IMREAD_UNCHANGED)
                 x_o = int(0.15 * w)
                 y_o = int(0.2 * h)
 
