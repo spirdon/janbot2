@@ -32,7 +32,7 @@ class PapiezifyCommand(jb2.command.Command):
                 image_url = message.attachments[0]['url']
                 await self.papiezify(message, client, image_url)
         else:
-            url = url.strip()
+            url = url.strip().split('?')[0]
             await self.papiezify(message, client, url)
 
     async def papiezify(self, message, client, url):
