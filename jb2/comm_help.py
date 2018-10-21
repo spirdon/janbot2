@@ -22,6 +22,7 @@ class HelpCommand(jb2.command.Command):
             emb = discord.Embed()
             emb.title = "Jan Bot 2"
             emb.description = "Polski bot memiczny."
+            emb.set_thumbnail(url=client.user.avatar_url)
             emb.add_field(name=":gear: Ustawienia",
                           value=f"`{prefix}help config`")
             emb.add_field(name=":pencil2: Tekst",
@@ -59,10 +60,10 @@ class HelpCommand(jb2.command.Command):
                 emb.description = """
                 **`{0}chajzer`** - postuje losowego Chajzera
 
-                **`{0}dziadzius`** - postuje losowego dziadziusia
-
                 **`{0}cenzo <url>`** - wstawia twarz papieża na inne twarze
                 `url` - adres URL obrazka, ewentualnie załącznik do wiadomości
+
+                **`{0}dziadzius`** - postuje losowego dziadziusia
 
                 **`{0}sminem`** - postuje losowego Sminema
                 """.format(prefix)
