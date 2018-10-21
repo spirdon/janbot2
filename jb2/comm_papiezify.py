@@ -31,7 +31,7 @@ class PapiezifyCommand(jb2.command.Command):
             extension = url.split('.')[-1]
             full_path = 'res/images/image.' + extension
             papaj_path = 'res/images/papaj.png'
-            cascadePath = 'res/xml/haarcascade_frontalface_default.xml'
+            cascade_path = 'res/xml/haarcascade_frontalface_default.xml'
 
             try:
                 r = requests.get(url, stream=True)
@@ -46,7 +46,7 @@ class PapiezifyCommand(jb2.command.Command):
                     raise Exception
 
                 img = cv2.imread(full_path, cv2.IMREAD_UNCHANGED)
-                face_cascade = cv2.CascadeClassifier(cascadePath)
+                face_cascade = cv2.CascadeClassifier(cascade_path)
                 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 faces = face_cascade.detectMultiScale(
                     gray,
