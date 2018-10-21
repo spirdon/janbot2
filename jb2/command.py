@@ -14,13 +14,13 @@ class Command:
         prefix = jb2_server['prefix']
         start_index = len(prefix)
 
-        prefix = prefix.replace('$', '\\$')
-        prefix = prefix.replace('^', '\\^')
-        prefix = prefix.replace('[', '\\[')
-        prefix = prefix.replace(']', '\\]')
-        prefix = prefix.replace('(', '\\(')
-        prefix = prefix.replace(')', '\\)')
-        prefix = prefix.replace('.', '\\.')
+        prefix = prefix.replace('$', '\\$')\
+                       .replace('^', '\\^')\
+                       .replace('[', '\\[')\
+                       .replace(']', '\\]')\
+                       .replace('(', '\\(')\
+                       .replace(')', '\\)')\
+                       .replace('.', '\\.')
 
         # print("^" + prefix + self.get_pattern(), msg)
 
