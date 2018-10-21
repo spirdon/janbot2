@@ -3,33 +3,31 @@ import os
 import jb2.client
 import jb2.db_connector
 
-import jb2.comm_ankieta
-import jb2.comm_ask
-#import jb2.comm_cenzovid
-import jb2.comm_chajzer
-import jb2.comm_dziadzius
-import jb2.comm_elo
-import jb2.comm_help
-import jb2.comm_papiezify
-import jb2.comm_prefix
-import jb2.comm_przondlo
-import jb2.comm_sminem
+import jb2.config.prefix
+import jb2.image.chajzer
+import jb2.image.dziadzius
+import jb2.image.cenzo
+import jb2.image.sminem
+import jb2.help
+import jb2.misc.ankieta
+import jb2.text.ask
+import jb2.text.elo
+import jb2.text.przondlo
+#import jb2.video.comm_cenzovid # doesn't work well
 
 
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
-    jb2.comm_ankieta.AnkietaCommand(),
-    jb2.comm_ask.AskCommand(),
-#    jb2.comm_cenzovid.CenzovidCommand(),
-    jb2.comm_chajzer.ChajzerCommand(),
-    jb2.comm_dziadzius.DziadusCommand(),
-    jb2.comm_elo.EloCommand(),
-    jb2.comm_help.HelpCommand(),
-    jb2.comm_papiezify.PapiezifyCommand(),
-    jb2.comm_prefix.PrefixCommand(),
-    jb2.comm_przondlo.PrzondloCommand(),
-    jb2.comm_sminem.SminemCommand()
+    jb2.config.prefix.PrefixCommand(),
+    jb2.image.chajzer.ChajzerCommand(),
+    jb2.image.dziadzius.DziadusCommand(),
+    jb2.image.cenzo.CenzoCommand(),
+    jb2.help.HelpCommand(),
+    jb2.misc.ankieta.AnkietaCommand(),
+    jb2.text.ask.AskCommand(),
+    jb2.text.elo.EloCommand(),
+    jb2.text.przondlo.PrzondloCommand()
 )
 
 

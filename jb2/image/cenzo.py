@@ -11,9 +11,9 @@ import jb2.embed
 from PIL import Image, ImageDraw
 
 
-class PapiezifyCommand(jb2.command.Command):
+class CenzoCommand(jb2.command.Command):
     def get_pattern(self):
-        return r'papiezify( .*)?$'
+        return r'cenzo( .*)?$'
 
     async def action(self, connector, message, client):
         msg = message.content.strip()

@@ -61,8 +61,8 @@ class HelpCommand(jb2.command.Command):
 
                 **`{0}dziadzius`** - postuje losowego dziadziusia
 
-                **`{0}cenzo <url>`** - wstawia twarz papieża na inne twarze
-                `url` - adres URL obrazka, ewentualnie załącznik do wiadomości
+                **`{0}papiezify <url>`** - wstawia twarz papieża na inne twarze
+                `url` - adres URL obrazka
 
                 **`{0}sminem`** - postuje losowego Sminema
                 """.format(prefix)
