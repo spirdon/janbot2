@@ -63,10 +63,12 @@ class PrzondloCommand(jb2.command.Command):
                 out += l
                 continue
             r = random.uniform(0.0, 1.0)
+
             if r > 0.05:
                 new_text = l
             else:
                 new_text = ""
+
             while True:
                 r = random.uniform(0.0, 1.0)
                 if r < przondling_factor:
@@ -79,5 +81,6 @@ class PrzondloCommand(jb2.command.Command):
                 else:
                     break
             out += new_text
+
         return out
 

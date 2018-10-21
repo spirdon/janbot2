@@ -69,7 +69,7 @@ class DatabaseConnector:
                 'prefix': 'jb2_'
             }
 
-        row = rows[0]
+        row = list(rows[0])
         print("** Found server")
 
         return {

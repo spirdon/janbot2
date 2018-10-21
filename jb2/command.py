@@ -12,8 +12,13 @@ class Command:
         msg = message.content
         jb2_server = connector.get_server(message.server.id)
         prefix = jb2_server['prefix']
+        start_index = len(prefix)
+
+        if prefix in ['$', '^']:
+            prefix = '\\' + prefix
+
+        # print("^" + prefix + self.get_pattern(), msg)
 
         if re.match("^" + prefix + self.get_pattern(), msg) is not None:
-            start_index = len(prefix)
             message.content = message.content[start_index:]
             await self.action(connector, message, client)

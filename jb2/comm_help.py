@@ -16,14 +16,16 @@ class HelpCommand(jb2.command.Command):
 
         prefix = connector.get_server(message.server.id)['prefix']
 
+        print("^" + pattern, msg)
+
         group = re.match("^" + pattern, msg).group(1)
 
         if group is None:
             emb = discord.Embed()
             emb.title = "Jan Bot 2"
             emb.description = "Polski bot memiczny."
-            emb.add_field(name=":hammer: Moderacja",
-                          value=f"`{prefix}help moderation`",
+            emb.add_field(name=":gear: Ustawienia",
+                          value=f"`{prefix}help config`",
                           inline=True)
             emb.add_field(name=":pencil2: Tekst",
                           value=f"`{prefix}help text`",
@@ -31,9 +33,9 @@ class HelpCommand(jb2.command.Command):
         else:
             group = group.strip()
 
-            if group == "moderation":
+            if group == "config":
                 emb = discord.Embed()
-                emb.title = ":hammer: Moderacja - Komendy"
+                emb.title = ":gear: Ustawienia - Komendy"
                 emb.description = """
                     **`{0}prefix <pfx>`**
                     `pfx` - nowy prefiks składający się z 1-4 znaków
