@@ -48,18 +48,18 @@ class DatabaseConnector:
 
     def create_tables(self):
         print("* Creating tables (if they don't exist)")
-        self.execute_sql_file('query/create_tables.sql')
+        self.execute_sql_file('res/query/create_tables.sql')
         self.conn.commit()
 
     def get_server(self, server_id):
         print("* Looking for server ({})".format(server_id))
-        self.execute_sql_file_with_args('query/find_server.sql', (server_id,))
+        self.execute_sql_file_with_args('res/query/find_server.sql', (server_id,))
         rows = self.cursor.fetchall()
 
         if rows == []:
             print("** Could not find server")
             print("** Adding server to database")
-            self.execute_sql_file_with_args('query/create_server.sql',
+            self.execute_sql_file_with_args('res/query/create_server.sql',
                                             (server_id,))
             self.conn.commit()
             print("** Added server to database")
@@ -78,6 +78,6 @@ class DatabaseConnector:
         }
 
     def set_server_prefix(self, server_id, prefix):
-        self.execute_sql_file_with_args('query/set_server_prefix.sql',
+        self.execute_sql_file_with_args('res/query/set_server_prefix.sql',
                                         (prefix, server_id))
         self.conn.commit()
