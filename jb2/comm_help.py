@@ -7,7 +7,7 @@ import jb2.embed
 
 class HelpCommand(jb2.command.Command):
     def get_pattern(self):
-        return r'help( .*)?'
+        return r'help( .*)?$'
 
     async def action(self, connector, message, client):
         msg = message.content.strip()
@@ -23,7 +23,11 @@ class HelpCommand(jb2.command.Command):
             emb.title = "Jan Bot 2"
             emb.description = "Polski bot memiczny."
             emb.add_field(name=":hammer: Moderacja",
-                          value="`{}help moderation`".format(prefix))
+                          value=f"`{prefix}help moderation`",
+                          inline=True)
+            emb.add_field(name=":pencil2: Tekst",
+                          value=f"`{prefix}help text`",
+                          inline=True)
         else:
             group = group.strip()
 
@@ -33,6 +37,13 @@ class HelpCommand(jb2.command.Command):
                 emb.description = """
                     **`{0}prefix <pfx>`**
                     `pfx` - nowy prefiks składający się z 1-4 znaków
+                """.format(prefix)
+            elif group == "text":
+                emb = discord.Embed()
+                emb.title = ":pencil2: Tekst - Komendy"
+                emb.description = """
+                    **`{0}przondlo <text>`**
+                    `text` - tekst, który ma zostać zmieniony na przondłomowę
                 """.format(prefix)
             else:
                 text = "Nieznana grupa komend"
