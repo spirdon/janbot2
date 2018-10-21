@@ -3,7 +3,9 @@ import os
 import jb2.client
 import jb2.db_connector
 
+import jb2.comm_ankieta
 import jb2.comm_ask
+import jb2.comm_dziadzius
 import jb2.comm_elo
 import jb2.comm_help
 import jb2.comm_prefix
@@ -13,7 +15,9 @@ import jb2.comm_przondlo
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
+    jb2.comm_ankieta.AnkietaCommand(),
     jb2.comm_ask.AskCommand(),
+    jb2.comm_dziadzius.DziadusCommand(),
     jb2.comm_elo.EloCommand(),
     jb2.comm_help.HelpCommand(),
     jb2.comm_prefix.PrefixCommand(),

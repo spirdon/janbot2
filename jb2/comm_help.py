@@ -23,11 +23,13 @@ class HelpCommand(jb2.command.Command):
             emb.title = "Jan Bot 2"
             emb.description = "Polski bot memiczny."
             emb.add_field(name=":gear: Ustawienia",
-                          value=f"`{prefix}help config`",
-                          inline=True)
+                          value=f"`{prefix}help config`")
             emb.add_field(name=":pencil2: Tekst",
-                          value=f"`{prefix}help text`",
-                          inline=True)
+                          value=f"`{prefix}help text`")
+            emb.add_field(name=":camera_with_flash: Obrazki",
+                          value=f"`{prefix}help image`")
+            emb.add_field(name=":tools: Różne",
+                          value=f"`{prefix}help misc`")
         else:
             group = group.strip()
 
@@ -46,6 +48,20 @@ class HelpCommand(jb2.command.Command):
                     `text` - tekst, który ma zostać zmieniony na przondłomowę
 
                     **`{0}elo`** - losowe przywitanie
+                """.format(prefix)
+            elif group == "image":
+                emb = discord.Embed()
+                emb.title = ":camera_with_flash: Obrazki - Komendy"
+                emb.description = """
+                    **`{0}dziadzius`** - postuje losowego dziadziusia
+                """.format(prefix)
+            elif group == "misc":
+                emb = discord.Embed()
+                emb.title = ":tools: Różne - Komendy"
+                emb.description = """
+                    **`{0}ankieta <question>: <options>`** - postuje ankietę
+                    `question` - pytanie (musi po nim być dwukropek)
+                    `options` - pytania oddzielone znakiem plusa (+)
                 """.format(prefix)
             else:
                 text = "Nieznana grupa komend"
