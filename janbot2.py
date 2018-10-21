@@ -3,12 +3,14 @@ import os
 import jb2.client
 import jb2.db_connector
 
+import jb2.comm_help
 import jb2.comm_prefix
 
 
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
+    jb2.comm_help.HelpCommand(),
     jb2.comm_prefix.PrefixCommand(),
 )
 
