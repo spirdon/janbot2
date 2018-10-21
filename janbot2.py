@@ -12,6 +12,7 @@ import jb2.comm_help
 import jb2.comm_papiezify
 import jb2.comm_prefix
 import jb2.comm_przondlo
+import jb2.comm_sminem
 
 
 client = jb2.client.client
@@ -25,7 +26,8 @@ commands = (
     jb2.comm_help.HelpCommand(),
     jb2.comm_papiezify.PapiezifyCommand(),
     jb2.comm_prefix.PrefixCommand(),
-    jb2.comm_przondlo.PrzondloCommand()
+    jb2.comm_przondlo.PrzondloCommand(),
+    jb2.comm_sminem.SminemCommand()
 )
 
 

@@ -16,8 +16,8 @@ class ChajzerCommand(jb2.command.Command):
 
     async def action(self, connector, message, client):
         emb = discord.Embed()
-        author = message.author
-        emb.set_footer(text=author, icon_url=author.avatar_url)
+        footer_text = "Chajzer dla " + str(message.author)
+        emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)
         emb.set_image(url=random.choice(self.chajzers))
 
         await client.send_message(message.channel, embed=emb)
