@@ -22,8 +22,7 @@ class PrzondloCommand(jb2.command.Command):
             emb = jb2.embed.error_embed(author_m, text)
         else:
             text = self.__przondling(text.lower().strip())
-            emb = discord.Embed()
-            emb.description = "{}: {}".format(author_m, text)
+            emb = jb2.embed.embed(":bee:", author_m, text)
 
         await client.send_message(message.channel, embed=emb)
 
