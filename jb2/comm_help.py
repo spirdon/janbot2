@@ -44,19 +44,23 @@ class HelpCommand(jb2.command.Command):
                 emb = discord.Embed()
                 emb.title = ":pencil2: Tekst - Komendy"
                 emb.description = """
+                    **`{0}elo`** - losowe przywitanie
+
                     **`{0}przondlo <text>`** - zmiana tekstu na bełkot
                     `text` - tekst, który ma zostać zmieniony na przondłomowę
-
-                    **`{0}elo`** - losowe przywitanie
                 """.format(prefix)
             elif group == "image":
                 emb = discord.Embed()
                 emb.title = ":camera_with_flash: Obrazki - Komendy"
                 emb.description = """
-                    **`{0}dziadzius`** - postuje losowego dziadziusia
+                **`{0}chajzer`** - postuje losowego Chajzera
 
-                    **`{0}papiezify <url>`** - wstawia mordę/-y papieża na twarze
-                    `url` - adres URL obrazka
+                **`{0}dziadzius`** - postuje losowego dziadziusia
+
+                **`{0}papiezify <url>`** - wstawia mordę/-y papieża na twarze
+                `url` - adres URL obrazka
+
+                **`{0}sminem`** - postuje losowego Sminema
                 """.format(prefix)
             elif group == "misc":
                 emb = discord.Embed()
