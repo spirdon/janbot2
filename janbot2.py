@@ -22,9 +22,10 @@ client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
     jb2.config.prefix.PrefixCommand(),
+    jb2.image.cenzo.CenzoCommand(),
     jb2.image.chajzer.ChajzerCommand(),
     jb2.image.dziadzius.DziadusCommand(),
-    jb2.image.cenzo.CenzoCommand(),
+    jb2.image.sminem.SminemCommand(),
     jb2.help.HelpCommand(),
     jb2.misc.ankieta.AnkietaCommand(),
     jb2.text.ask.AskCommand(),
