@@ -24,7 +24,7 @@ class PapiezifyCommand(jb2.command.Command):
         url = re.match("^" + pattern, msg).group(1)
 
         if url is None or url == '':
-            if message.attachments == []:
+            if not message.attachments:
                 text = "Musisz podać URL obrazka"
                 emb = jb2.embed.error_embed(author_m, text)
                 await client.send_message(message.channel, embed=emb)
