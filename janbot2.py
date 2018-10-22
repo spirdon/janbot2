@@ -10,6 +10,7 @@ import jb2.image.cenzo
 import jb2.image.sminem
 import jb2.help
 import jb2.misc.ankieta
+import jb2.misc.roll
 import jb2.text.ask
 import jb2.text.elo
 import jb2.text.przondlo
@@ -28,6 +29,7 @@ commands = (
     jb2.image.sminem.SminemCommand(),
     jb2.help.HelpCommand(),
     jb2.misc.ankieta.AnkietaCommand(),
+    jb2.misc.roll.RollCommand(),
     jb2.text.ask.AskCommand(),
     jb2.text.elo.EloCommand(),
     jb2.text.przondlo.PrzondloCommand(),
