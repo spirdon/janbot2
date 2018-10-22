@@ -13,6 +13,7 @@ import jb2.misc.ankieta
 import jb2.misc.roll
 import jb2.text.ask
 import jb2.text.elo
+import jb2.text.gejowo
 import jb2.text.przondlo
 import jb2.text.szkaluje
 import jb2.text.ufnal
@@ -32,6 +33,7 @@ commands = (
     jb2.misc.roll.RollCommand(),
     jb2.text.ask.AskCommand(),
     jb2.text.elo.EloCommand(),
+    jb2.text.gejowo.GejowoCommand(),
     jb2.text.przondlo.PrzondloCommand(),
     jb2.text.szkaluje.SzkalujeCommand(),
     jb2.text.ufnal.UfnalCommand()
