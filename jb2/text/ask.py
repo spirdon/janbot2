@@ -27,5 +27,6 @@ class AskCommand(jb2.command.Command):
         else:
             emoji = ":8ball:"
             emb = jb2.embed.embed(emoji, author_m, random.choice(self.answers))
+            emb.colour = 0x007777
 
         await client.send_message(message.channel, embed=emb)

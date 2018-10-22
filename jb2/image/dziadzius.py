@@ -16,6 +16,7 @@ class DziadusCommand(jb2.command.Command):
 
     async def action(self, connector, message, client):
         emb = discord.Embed()
+        emb.color = 0xcccccc
         footer_text = "Dziadziuś dla " + str(message.author)
         emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)
         emb.set_image(url=random.choice(self.grandpas))

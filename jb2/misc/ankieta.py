@@ -48,6 +48,7 @@ class AnkietaCommand(jb2.command.Command):
                 footer = " | Wybierz opcję klikając na reakcję do tego posta"
                 emb = discord.Embed(title=title, description=description)
                 emb.title = title
+                emb.color = 0x00ffff
                 emb.set_footer(text=footer, icon_url=message.author.avatar_url)
                 correct = True
 

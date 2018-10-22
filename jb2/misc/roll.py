@@ -27,6 +27,6 @@ class RollCommand(jb2.command.Command):
 
         emoji = ":game_die:"
         emb = jb2.embed.embed(emoji, author_m, r)
-        emb.color = 0xff2222
+        emb.colour = 0xff2222
 
         await client.send_message(message.channel, embed=emb)
