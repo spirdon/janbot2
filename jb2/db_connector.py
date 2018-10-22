@@ -53,7 +53,8 @@ class DatabaseConnector:
 
     def get_server(self, server_id):
         print("* Looking for server ({})".format(server_id))
-        self.execute_sql_file_with_args('res/query/find_server.sql', (server_id,))
+        self.execute_sql_file_with_args('res/query/find_server.sql',
+                                        (server_id,))
         rows = self.cursor.fetchall()
 
         if rows == []:
@@ -81,3 +82,45 @@ class DatabaseConnector:
         self.execute_sql_file_with_args('res/query/set_server_prefix.sql',
                                         (prefix, server_id))
         self.conn.commit()
+
+    def get_channel(self, channel_id):
+        print("* Looking for channel ({})")
+        self.execute_sql_file_with_args('res/query/find_channel.sql',
+                                        (channel_id,))
+        rows = self.cursor.fetchall()
+        if rows == []:
+            print("** Could not find channel")
+            print("** Adding server to database")
+            self.execute_sql_file_with_args('res/query/create_channel.sql',
+                                            (channel_id,))
+            self.conn.commit()
+            print("** Added channel to database")
+
+            return {
+                'channel_id': channel_id,
+                'is_anonymous': False
+            }
+
+        row = list(rows[0])
+        print("** Found channel")
+
+        return {
+            'channel_id': row[0],
+            'is_anonymous': row[1]
+        }
+
+    def toggle_channel_anon(self, channel_id):
+        channel_info = self.get_channel(channel_id)
+        anon = channel_info['is_anonymous']
+        self.execute_sql_file_with_args('res/query/set_channel_anon.sql',
+                                        (anon ^ True, channel_id))
+        self.conn.commit()
+        return anon ^ True
+    
+    def get_all_anon_channels(self):
+        self.execute_sql_file('res/query/get_all_anon_channels.sql')
+        rows = self.cursor.fetchall()
+        anon_channels = []
+        for row in rows:
+            anon_channels.append(row[0])
+        return anon_channels

@@ -2,6 +2,9 @@ import re
 
 
 class Command:
+    def with_prefix(self):
+        return True
+
     def get_pattern(self):
         pass
 
@@ -21,6 +24,12 @@ class Command:
                        .replace('.', '\\.')\
                        .replace('+', '\\+')\
 
-        if re.match("^" + prefix + self.get_pattern(), msg) is not None:
-            message.content = message.content[start_index:]
+        if self.with_prefix():
+            full_pattern = "^" + prefix + self.get_pattern()
+            msg = message.content[start_index:]
+        else:
+            full_pattern = "^" + self.get_pattern()
+
+        if re.match(full_pattern, msg) is not None:
+            print(full_pattern, msg, message.content)
             await self.action(connector, message, client)

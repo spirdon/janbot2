@@ -3,6 +3,7 @@ import os
 import jb2.client
 import jb2.db_connector
 
+import jb2.config.anon
 import jb2.config.prefix
 import jb2.image.chajzer
 import jb2.image.dziadzius
@@ -23,6 +24,8 @@ import jb2.text.ufnal
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
+    jb2.config.anon.AnonCommand(),
+    jb2.config.anon.AnonimizeCommand(),
     jb2.config.prefix.PrefixCommand(),
     jb2.image.cenzo.CenzoCommand(),
     jb2.image.chajzer.ChajzerCommand(),
@@ -36,7 +39,7 @@ commands = (
     jb2.text.gejowo.GejowoCommand(),
     jb2.text.przondlo.PrzondloCommand(),
     jb2.text.szkaluje.SzkalujeCommand(),
-    jb2.text.ufnal.UfnalCommand()
+    #jb2.text.ufnal.UfnalCommand()
 )
 
 
