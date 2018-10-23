@@ -1,1 +1,1 @@
-INSERT INTO users VALUES(%s, %s, 0, 1);
+INSERT INTO users VALUES(%s, %s, 0, 0);
