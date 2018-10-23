@@ -15,9 +15,7 @@ class RankingCommand(jb2.command.Command):
         emb = discord.Embed()
 
         ranks = self.connector.get_ranks(server_id)
-        print(ranks)
-        print(server_id)
-            
+
         desc = ''
         for rank in ranks:
             member = message.server.get_member(rank[1])
@@ -27,7 +25,7 @@ class RankingCommand(jb2.command.Command):
                 break
 
         emb = discord.Embed(description=desc)
-        emb.title = ":star2: Ranking punktów"
+        emb.title = ":star: Ranking punktów"
         emb.colour = 0x00ffff
         footer_text = "Ranking dla " + str(message.author)
         emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)

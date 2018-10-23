@@ -12,7 +12,7 @@ class HelpCommand(jb2.command.Command):
     async def action(self, prefix, message, client):
         msg = message.content.strip()
         author_m = message.author.mention
-        pattern = self.get_full_pattern(prefix)
+        pattern = self.get_full_pattern(prefix, message)
 
         prefix = self.connector.get_server(message.server.id)['prefix']
 
@@ -24,10 +24,10 @@ class HelpCommand(jb2.command.Command):
             emb.description = "Polski bot memiczny."
             emb.add_field(name=":gear: Ustawienia",
                           value=f"`{prefix}help config`")
-            emb.add_field(name=":pencil2: Tekst",
-                          value=f"`{prefix}help text`")
             emb.add_field(name=":camera_with_flash: Obrazki",
                           value=f"`{prefix}help image`")
+            emb.add_field(name=":pencil2: Tekst",
+                          value=f"`{prefix}help text`")
             emb.add_field(name=":tools: Różne",
                           value=f"`{prefix}help misc`")
         else:
@@ -37,8 +37,33 @@ class HelpCommand(jb2.command.Command):
                 emb = discord.Embed()
                 emb.title = ":gear: Ustawienia - Komendy"
                 emb.description = """
+                **`{0}toggle anon`** - włączenie/wyłączenie anonimowości kanału
+
+                **`{0}toggle rank`** - włączenie/wyłączenie punktów kanału
+
                 **`{0}prefix <pfx>`** - wyświetlenie/zmiana prefiksu
                 `pfx` - nowy prefiks składający się z 1-4 znaków
+                """.format(prefix)
+            elif group == "image":
+                emb = discord.Embed()
+                emb.title = ":camera_with_flash: Obrazki - Komendy"
+                emb.description = """
+                **`{0}cenzo <url>`** - wstawia twarz papieża na inne twarze
+                `url` - adres URL obrazka
+
+                **`{0}chajzer`** - postuje losowego Chajzera
+
+                **`{0}dziadzius`** - postuje losowego dziadziusia
+
+                **`{0}sminem`** - postuje losowego Sminema
+                """.format(prefix)
+            elif group == "misc":
+                emb = discord.Embed()
+                emb.title = ":tools: Różne - Komendy"
+                emb.description = """
+                **`{0}ankieta <question>: <options>`** - postuje ankietę
+                `question` - pytanie (musi po nim być dwukropek)
+                `options` - odpowiedzi oddzielone znakiem plusa (+)
                 """.format(prefix)
             elif group == "text":
                 emb = discord.Embed()
@@ -50,29 +75,15 @@ class HelpCommand(jb2.command.Command):
 
                 **`{0}elo`** - losowe przywitanie
 
+                **`{0}gejowo`** - losowy anons z gejowo.pl
+
                 **`{0}przondlo <text>`** - zmiana tekstu na bełkot
                 `text` - tekst, który ma zostać zmieniony na przondłomowę
-                """.format(prefix)
-            elif group == "image":
-                emb = discord.Embed()
-                emb.title = ":camera_with_flash: Obrazki - Komendy"
-                emb.description = """
-                **`{0}chajzer`** - postuje losowego Chajzera
 
-                **`{0}dziadzius`** - postuje losowego dziadziusia
+                **`{0}szkaluj <nick>`** - szkaluje daną osobę
+                `nick` - nick osoby szkalowanej
 
-                **`{0}papiezify <url>`** - wstawia twarz papieża na inne twarze
-                `url` - adres URL obrazka
-
-                **`{0}sminem`** - postuje losowego Sminema
-                """.format(prefix)
-            elif group == "misc":
-                emb = discord.Embed()
-                emb.title = ":tools: Różne - Komendy"
-                emb.description = """
-                **`{0}ankieta <question>: <options>`** - postuje ankietę
-                `question` - pytanie (musi po nim być dwukropek)
-                `options` - odpowiedzi oddzielone znakiem plusa (+)
+                **`{0}ufnal`** - postuje losowy post Bartka Ufnala
                 """.format(prefix)
             else:
                 text = "Nieznana grupa komend"
