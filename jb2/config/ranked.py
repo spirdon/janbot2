@@ -60,7 +60,7 @@ class ExpCommand(jb2.command.Command):
 
         if lvl > c_lvl:
             text = "Gratulacje, zdobyłeś {} poziom!".format(lvl)
-            emb = jb2.embed.embed("::", author_m, text)
+            emb = jb2.embed.embed(":star:", author_m, text)
             await client.send_message(message.channel, embed=emb)
 
 
@@ -72,9 +72,9 @@ def get_lvl_from_exp(exp):
     
 
 def get_required_exp(lvl):
-    current_lvl = 2
+    current_lvl = 1
     required_exp = 100
     while lvl > current_lvl:
         current_lvl += 1
-        required_exp += (current_lvl ** 1.1) * 150
+        required_exp = (current_lvl ** 1.1) * 150
     return int(required_exp)

@@ -59,13 +59,14 @@ class RankCommand(jb2.command.Command):
 
         exp, lvl = self.connector.get_user(server.id, user.id)[2:4]
         nextlvl_exp = jb2.config.ranked.get_required_exp(lvl + 1)
+        curr_required = jb2.config.ranked.get_required_exp(lvl)
 
         if lvl == 1:
             prevlvl_exp = 0
             progress = exp / nextlvl_exp
         else:
-            prevlvl_exp = jb2.config.ranked.get_required_exp(lvl)
-            progress = (exp - prevlvl_exp)/(nextlvl_exp - prevlvl_exp)
+            prevlvl_exp = jb2.config.ranked.get_required_exp(lvl - 1)
+            progress = (exp - prevlvl_exp)/(nextlvl_exp - curr_required)
 
         progress_rect_width = progress * 600
         progress_rect_height = 20
@@ -93,7 +94,7 @@ class RankCommand(jb2.command.Command):
 
         # Draw exp/next_lvl_exp
         exp_left = str(exp - prevlvl_exp)
-        exp_right = str(nextlvl_exp - prevlvl_exp)
+        exp_right = str(nextlvl_exp - curr_required)
         text = exp_left + "/" + exp_right
         size2 = draw.textsize(text, font=self.smaller_fnt)[0]
         draw.text((870 - size2, 150), text, fill=(90, 90, 90),
