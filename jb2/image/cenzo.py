@@ -37,7 +37,7 @@ class CenzoCommand(jb2.command.Command):
 
     async def papiezify(self, message, client, url):
         extension = url.split('.')[-1]
-        full_path = 'res/images/image.' + extension
+        full_path = 'res/temp/image.' + extension
         papaj_path = 'res/images/papaj.png'
         cascade_path = 'res/xml/haarcascade_frontalface_default.xml'
 
