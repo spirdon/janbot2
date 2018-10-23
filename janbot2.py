@@ -12,6 +12,7 @@ import jb2.image.cenzo
 import jb2.image.sminem
 import jb2.help
 import jb2.misc.ankieta
+import jb2.misc.rank
 import jb2.misc.roll
 import jb2.text.ask
 import jb2.text.elo
@@ -25,24 +26,25 @@ import jb2.text.ufnal
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
-    jb2.config.anon.AnonimizeCommand(),
-    jb2.config.anon.ToggleAnonCommand(),
-    jb2.config.prefix.PrefixCommand(),
-    jb2.config.ranked.ExpCommand(),
-    jb2.config.ranked.ToggleRankCommand(),
-    jb2.image.cenzo.CenzoCommand(),
-    jb2.image.chajzer.ChajzerCommand(),
-    jb2.image.dziadzius.DziadusCommand(),
-    jb2.image.sminem.SminemCommand(),
-    jb2.help.HelpCommand(),
-    jb2.misc.ankieta.AnkietaCommand(),
-    jb2.misc.roll.RollCommand(),
-    jb2.text.ask.AskCommand(),
-    jb2.text.elo.EloCommand(),
-    jb2.text.gejowo.GejowoCommand(),
-    jb2.text.przondlo.PrzondloCommand(),
-    jb2.text.szkaluje.SzkalujeCommand(),
-    #jb2.text.ufnal.UfnalCommand()
+    jb2.config.anon.AnonimizeCommand(connector),
+    jb2.config.anon.ToggleAnonCommand(connector),
+    jb2.config.prefix.PrefixCommand(connector),
+    jb2.config.ranked.ExpCommand(connector),
+    jb2.config.ranked.ToggleRankCommand(connector),
+    jb2.image.cenzo.CenzoCommand(connector),
+    jb2.image.chajzer.ChajzerCommand(connector),
+    jb2.image.dziadzius.DziadusCommand(connector),
+    jb2.image.sminem.SminemCommand(connector),
+    jb2.help.HelpCommand(connector),
+    jb2.misc.ankieta.AnkietaCommand(connector),
+    jb2.misc.rank.RankCommand(connector),
+    jb2.misc.roll.RollCommand(connector),
+    jb2.text.ask.AskCommand(connector),
+    jb2.text.elo.EloCommand(connector),
+    jb2.text.gejowo.GejowoCommand(connector),
+    jb2.text.przondlo.PrzondloCommand(connector),
+    jb2.text.szkaluje.SzkalujeCommand(connector),
+    #jb2.text.ufnal.UfnalCommand(connector)
 )
 
 
@@ -72,7 +74,7 @@ async def on_message(message):
 
     # Process all commands (run them if regex is ok)
     for command in commands:
-        await command.process(prefix, connector, message, client)
+        await command.process(prefix, message, client)
 
 
 def main():

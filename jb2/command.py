@@ -2,16 +2,25 @@ import re
 
 
 class Command:
+    def __init__(self, connector):
+        self.connector = connector
+    
     def with_prefix(self):
         return True
 
     def get_pattern(self):
         pass
 
-    async def action(self, connector, message, client):
+    def get_full_pattern(self, prefix):
+        if self.with_prefix():
+            return prefix + self.get_pattern()
+        else:
+            return self.get_pattern()
+
+    async def action(self, prefix, message, client):
         pass
 
-    async def process(self, prefix, connector, message, client):
+    async def process(self, prefix, message, client):
         msg = message.content
         start_index = len(prefix)
 
@@ -24,12 +33,5 @@ class Command:
                        .replace('.', '\\.')\
                        .replace('+', '\\+')\
 
-        if self.with_prefix():
-            full_pattern = "^" + prefix + self.get_pattern()
-            msg = message.content[start_index:]
-        else:
-            full_pattern = "^" + self.get_pattern()
-
-        print(full_pattern, msg, message.content)
-        if re.match(full_pattern, msg) is not None:
-            await self.action(connector, message, client)
+        if re.match(self.get_full_pattern(prefix), msg) is not None:
+            await self.action(prefix, message, client)

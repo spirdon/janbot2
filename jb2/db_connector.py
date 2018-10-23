@@ -143,17 +143,30 @@ class DatabaseConnector:
             ranked_channels.append(row[0])
         return ranked_channels
 
-    def get_user_exp(self, server_id, user_id):
-        self.execute_sql_file_with_args('res/query/get_user_exp.sql',
+    def get_user(self, server_id, user_id):
+        self.execute_sql_file_with_args('res/query/get_user.sql',
                                         (server_id, user_id))
         rows = self.cursor.fetchall()
         if rows:
             return rows[0]
         
-        self.execute_sql_file_with_args('res/query/add_user.sql',
+        self.execute_sql_file_with_args('res/query/create_user.sql',
                                         (server_id, user_id))
+        return (server_id, user_id, 0, 1)
 
     def set_user_exp(self, exp, lvl, server_id, user_id):
         self.execute_sql_file_with_args('res/query/set_user_exp.sql',
                                         (exp, lvl, server_id, user_id))
         self.conn.commit()
+
+    def get_ranks(self, server_id):
+        self.execute_sql_file_with_args('res/query/get_user_rank.sql',
+                                        (server_id,))
+        rows = self.cursor.fetchall()
+        return rows
+
+    def get_user_rank(self, server_id, user_id):
+        ranks = self.get_ranks(server_id)
+        for rank in ranks:
+            if rank[1] == user_id:
+                return rank[4]

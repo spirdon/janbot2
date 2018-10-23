@@ -9,21 +9,37 @@ import jb2.embed
 
 
 class RankCommand(jb2.command.Command):
-    def __init__(self):
-        self.smaller_fnt = ImageFont.truetype('font.ttf', 25)
-        self.regular_fnt = ImageFont.truetype('font.ttf', 40)
-        self.larger_fnt = ImageFont.truetype('font.ttf', 60)
-
-    def with_prefix(self):
-        return False
+    def __init__(self, connector):
+        self.connector = connector
+        self.smaller_fnt = ImageFont.truetype('res/font/font.ttf', 25)
+        self.regular_fnt = ImageFont.truetype('res/font/font.ttf', 40)
+        self.larger_fnt = ImageFont.truetype('res/font/font.ttf', 60)
+        self.downloaded_path = 'res/temp/avatar.webp'
+        self.avatar_path = 'res/temp/avatar.png'
+        self.frame_path = 'res/images/frame.png'
+        self.out_path = 'res/temp/profile.png'
 
     def get_pattern(self):
         return r'rank( <@!?(\d+)>)?$'
 
-    async def action(self, connector, message, client):
-        user = message.author
-        server = message.server
+    async def action(self, prefix, message, client):
+        msg = message.content.strip().lower()
+        user_id = re.match(self.get_full_pattern(prefix), msg).group(2)
+        server = message.author.server
 
+        if user_id is None:
+            user = message.author
+        else:
+            print(user_id)
+            user_id = user_id.strip()
+            user = server.get_member(user_id)
+
+        print(user)
+        self.draw_profile(user, server)
+
+        await client.send_file(message.channel, self.out_path)
+
+    def draw_profile(self, user, server):
         if user.avatar_url != '':
             url = user.avatar_url
         else:
@@ -31,32 +47,35 @@ class RankCommand(jb2.command.Command):
 
         r = requests.get(url)
 
-        with open('avatar.webp', 'wb') as outfile:
+        with open(self.downloaded_path, 'wb') as outfile:
             outfile.write(r.content)
 
-        im = Image.open('res/temp/avatar.webp').convert('RGBA')
-        im.save('res/temp/avatar.png', 'png')
+        im = Image.open(self.downloaded_path).convert('RGBA')
+        im.save(self.avatar_path, 'png')
 
-        avatar = Image.open('res/temp/avatar.png')
+        avatar = Image.open(self.avatar_path)
         avatar = avatar.resize((140, 140), Image.ANTIALIAS)
-        frame = Image.open('res/temp/frame.png').convert('RGBA')
+        frame = Image.open(self.frame_path).convert('RGBA')
 
-        current_exp, lvl = connector.get_user(server.id, user.id)[2, 3]
+        exp, lvl = self.connector.get_user(server.id, user.id)[2:4]
         nextlvl_exp = jb2.config.ranked.get_required_exp(lvl + 1)
 
         if lvl == 1:
             prevlvl_exp = 0
-            progress = current_exp / nextlvl_exp
+            progress = exp / nextlvl_exp
         else:
             prevlvl_exp = jb2.config.ranked.get_required_exp(lvl)
-            progress = (current_exp - prevlvl_exp)/(nextlvl_exp - prevlvl_exp)
+            progress = (exp - prevlvl_exp)/(nextlvl_exp - prevlvl_exp)
 
         progress_rect_width = progress * 600
         progress_rect_height = 20
-        name = user.name
-        identifier = "#" + user.identifier
 
-        if name.lower()[-1] == 'j':
+        full_username = str(user).split('#')
+
+        name = '#'.join(full_username[:-1])
+        identifier = "#" + full_username[-1]
+
+        if name[-1] == 'j':
             name += ' '
 
         img = Image.new("RGB", (930, 280), (35, 39, 45))
@@ -73,7 +92,7 @@ class RankCommand(jb2.command.Command):
                   fill=(90, 90, 90))
 
         # Draw exp/next_lvl_exp
-        exp_left = str(current_exp - prevlvl_exp)
+        exp_left = str(exp - prevlvl_exp)
         exp_right = str(nextlvl_exp - prevlvl_exp)
         text = exp_left + "/" + exp_right
         size2 = draw.textsize(text, font=self.smaller_fnt)[0]
@@ -96,7 +115,7 @@ class RankCommand(jb2.command.Command):
                   font=self.smaller_fnt)
 
         # Draw place
-        rank = get_rank(connector, server.id, user.id)
+        rank = self.connector.get_user_rank(server.id, user.id)
         text = "#" + str(rank)
         size3 += draw.textsize(text, font=self.larger_fnt)[0] + 30
         draw.text((870 - size3, 40), text, fill=(98, 211, 98),
@@ -111,8 +130,4 @@ class RankCommand(jb2.command.Command):
         img.paste(avatar, (70, 70), mask=avatar)
         img.paste(frame, (70, 70), mask=frame)
 
-        img.save('res/temp/profile.png')
-
-
-def get_rank(connector, server_id, user_id):
-    return connector.get_rank(server_id, user_id)
+        img.save(self.out_path)

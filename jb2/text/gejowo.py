@@ -12,7 +12,7 @@ class GejowoCommand(jb2.command.Command):
     def get_pattern(self):
         return r'gejowo$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         footer_text = "Gejowski anons dla " + str(message.author)
 
         emb = discord.Embed(color=0xff476f)

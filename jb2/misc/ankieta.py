@@ -9,10 +9,10 @@ class AnkietaCommand(jb2.command.Command):
     def get_pattern(self):
         return r'ankieta( .*:)?( ?\+.+)*$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         msg = message.content.strip()
         author_m = message.author.mention
-        pattern = self.get_pattern()
+        pattern = self.get_full_pattern(prefix)
 
         question = re.match("^" + pattern, msg).group(1)
         options = re.match("^" + pattern, msg).group(2)

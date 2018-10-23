@@ -6,16 +6,16 @@ class ToggleRankCommand(jb2.command.Command):
     def get_pattern(self):
         return r'toggle rank$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         author_m = message.author.mention
 
         if message.author.server_permissions.administrator:
-            result = connector.get_channel(message.channel.id)
-            connector.toggle_channel_anon(message.channel.id)
+            result = self.connector.get_channel(message.channel.id)
+            self.connector.toggle_channel_ranked(message.channel.id)
             if result["is_ranked"]:
-                text = "Włączono zdobywanie punktów"
-            else:
                 text = "Wyłączono zdobywanie punktów"
+            else:
+                text = "Włączono zdobywanie punktów"
             emb = jb2.embed.success_embed(author_m, text)
         else:
             text = "Aby wykonać tę operację musisz być Administratorem"
@@ -30,13 +30,15 @@ class ExpCommand(jb2.command.Command):
     def get_pattern(self):
         return r'(.+)$'
 
-    async def action(self, connector, message, client):
-        if message.channel.id not in connector.get_all_ranked_channels():
+    async def action(self, prefix, message, client):
+        if message.channel.id not in self.connector.get_all_ranked_channels():
             return
 
         msg = message.content.strip()
         author_m = message.author.mention
-        prefix = connector.get_server(message.server.id)['prefix']
+        prefix = self.connector.get_server(message.server.id)['prefix']
+        server_id = message.server.id
+        user_id = message.author.id
 
         # Omit messages that are too long
         if len(msg) > 50:
@@ -45,31 +47,34 @@ class ExpCommand(jb2.command.Command):
         # Omit messages that are commands
         if msg.startswith(prefix):
             return
-        
-        current_exp, current_lvl = connector.get_user_exp(message.server.id,
-                                                          message.channel.id)
+
+        c_exp, c_lvl = self.connector.get_user(server_id, user_id)[2:4]
         exp_added = len(msg)
 
-        exp = current_exp + exp_added
-        lvl = self.get_lvl_from_exp(exp)
+        exp = c_exp + exp_added
+        lvl = get_lvl_from_exp(exp)
 
-        connector.set_user_exp(exp, lvl, message.server.id, message.channel.id)
+        print(exp, lvl)
 
-        if lvl > current_lvl:
+        self.connector.set_user_exp(exp, lvl, server_id, user_id)
+
+        if lvl > c_lvl:
             text = "Gratulacje, zdobyłeś {} poziom!".format(lvl)
             emb = jb2.embed.embed("::", author_m, text)
             await client.send_message(message.channel, embed=emb)
 
-    def get_lvl_from_exp(self, exp):
-        current_lvl = 1
-        while self.get_required_exp(current_lvl) < exp:
-            current_lvl += 1
-        return current_lvl
-        
-    def get_required_exp(self, lvl):
-        current_lvl = 2
-        required_exp = 100
-        while lvl > current_lvl:
-            current_lvl += 1
-            required_exp += (current_lvl ** 1.1) * 150
-        return int(required_exp)
+
+def get_lvl_from_exp(exp):
+    current_lvl = 1
+    while get_required_exp(current_lvl) < exp:
+        current_lvl += 1
+    return current_lvl
+    
+
+def get_required_exp(lvl):
+    current_lvl = 2
+    required_exp = 100
+    while lvl > current_lvl:
+        current_lvl += 1
+        required_exp += (current_lvl ** 1.1) * 150
+    return int(required_exp)

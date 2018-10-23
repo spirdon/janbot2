@@ -10,7 +10,7 @@ import jb2.embed
 
 
 class UfnalCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
         with open('res/text/ufnalizmy.txt', 'r') as file:
             self.ufnalisms = file.readlines()
         self.load_new_ufnalisms()
@@ -21,7 +21,7 @@ class UfnalCommand(jb2.command.Command):
     def get_pattern(self):
         return r'ufnal$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         footer_text = "Ufnalizm dla " + str(message.author)
 
         emb = discord.Embed(color=0xd48b1a)

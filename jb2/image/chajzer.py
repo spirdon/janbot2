@@ -7,14 +7,14 @@ import jb2.embed
 
 
 class ChajzerCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
         with open('res/text/chajzery.txt') as file:
             self.chajzers = file.readlines()
 
     def get_pattern(self):
         return r'chajzer$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         emb = discord.Embed()
         emb.colour = 0x00ff00
         footer_text = "Chajzer dla " + str(message.author)

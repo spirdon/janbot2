@@ -7,14 +7,14 @@ import jb2.embed
 
 
 class DziadusCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
         with open('res/text/dziadziusie.txt') as file:
             self.grandpas = file.readlines()
 
     def get_pattern(self):
         return r'dziadzius$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         emb = discord.Embed()
         emb.color = 0xcccccc
         footer_text = "Dziadziuś dla " + str(message.author)

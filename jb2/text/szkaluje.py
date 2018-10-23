@@ -7,17 +7,17 @@ import jb2.embed
 
 
 class SzkalujeCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
         with open('res/text/szkalunki.txt') as file:
             self.slanders = file.readlines()
 
     def get_pattern(self):
         return r'szkaluj( .+)?$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         msg = message.content.strip()
         author_m = message.author.mention
-        pattern = self.get_pattern()
+        pattern = self.get_full_pattern(prefix)
 
         slandered = re.match("^" + pattern, msg).group(1)
 

@@ -11,12 +11,12 @@ class ToggleAnonCommand(jb2.command.Command):
     def get_pattern(self):
         return r'toggle anon$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         author_m = message.author.mention
 
         if message.author.server_permissions.administrator:
-            result = connector.get_channel(message.channel.id)
-            connector.toggle_channel_anon(message.channel.id)
+            result = self.connector.get_channel(message.channel.id)
+            self.connector.toggle_channel_anon(message.channel.id)
             if result["is_anonymous"]:
                 text = "Ustawiono kanał na jawny"
             else:
@@ -29,7 +29,8 @@ class ToggleAnonCommand(jb2.command.Command):
 
 
 class AnonimizeCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
+        self.connector = connector
         self.pseudos = {}
         with open('res/text/banowalne.txt') as f:
             self.bannable = f.readlines()
@@ -53,8 +54,8 @@ class AnonimizeCommand(jb2.command.Command):
     def get_pattern(self):
         return r'(.+)$'
 
-    async def action(self, connector, message, client):
-        if message.channel.id not in connector.get_all_anon_channels():
+    async def action(self, prefix, message, client):
+        if message.channel.id not in self.connector.get_all_anon_channels():
             return
     
         author_id = message.author.id
@@ -69,7 +70,7 @@ class AnonimizeCommand(jb2.command.Command):
         name = self.pseudos[message.author.id]['name']
         color = self.pseudos[message.author.id]['color']
         print("msg:", msg)
-        text = re.match("^" + self.get_pattern(), msg).group(1)
+        text = re.match("^" + self.get_full_pattern(prefix), msg).group(1)
         print("text:", text)
         for wf in self.wordfilters:
             pattern = re.compile(wf[0], re.IGNORECASE)

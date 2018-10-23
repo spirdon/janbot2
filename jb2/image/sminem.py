@@ -7,14 +7,14 @@ import jb2.embed
 
 
 class SminemCommand(jb2.command.Command):
-    def __init__(self):
+    def __init__(self, connector):
         with open('res/text/sminemy.txt') as file:
             self.sminems = file.readlines()
 
     def get_pattern(self):
         return r'sminem$'
 
-    async def action(self, connector, message, client):
+    async def action(self, prefix, message, client):
         emb = discord.Embed()
         emb.colour = 0x7777ff
         footer_text = "Sminem dla " + str(message.author)
