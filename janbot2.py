@@ -13,6 +13,7 @@ import jb2.image.sminem
 import jb2.help
 import jb2.misc.ankieta
 import jb2.misc.rank
+import jb2.misc.ranking
 import jb2.misc.roll
 import jb2.text.ask
 import jb2.text.elo
@@ -38,6 +39,7 @@ commands = (
     jb2.help.HelpCommand(connector),
     jb2.misc.ankieta.AnkietaCommand(connector),
     jb2.misc.rank.RankCommand(connector),
+    jb2.misc.ranking.RankingCommand(connector),
     jb2.misc.roll.RollCommand(connector),
     jb2.text.ask.AskCommand(connector),
     jb2.text.elo.EloCommand(connector),

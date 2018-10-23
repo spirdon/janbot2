@@ -59,8 +59,6 @@ class RankCommand(jb2.command.Command):
         nextlvl_exp = jb2.config.ranked.get_required_exp(lvl)
         prevlvl_exp = jb2.config.ranked.get_required_exp(lvl - 1)
 
-        print(nextlvl_exp, prevlvl_exp)
-
         progress = (exp - prevlvl_exp)/(nextlvl_exp)
 
         progress_rect_width = progress * 600
