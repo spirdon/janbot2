@@ -7,9 +7,9 @@ import jb2.command
 import jb2.embed
 
 
-class AnonCommand(jb2.command.Command):
+class ToggleAnonCommand(jb2.command.Command):
     def get_pattern(self):
-        return r'anon$'
+        return r'toggle anon$'
 
     async def action(self, connector, message, client):
         author_m = message.author.mention

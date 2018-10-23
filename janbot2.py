@@ -5,6 +5,7 @@ import jb2.db_connector
 
 import jb2.config.anon
 import jb2.config.prefix
+import jb2.config.ranked
 import jb2.image.chajzer
 import jb2.image.dziadzius
 import jb2.image.cenzo
@@ -24,9 +25,11 @@ import jb2.text.ufnal
 client = jb2.client.client
 connector = jb2.db_connector.DatabaseConnector()
 commands = (
-    jb2.config.anon.AnonCommand(),
     jb2.config.anon.AnonimizeCommand(),
+    jb2.config.anon.ToggleAnonCommand(),
     jb2.config.prefix.PrefixCommand(),
+    jb2.config.ranked.ExpCommand(),
+    jb2.config.ranked.ToggleRankCommand(),
     jb2.image.cenzo.CenzoCommand(),
     jb2.image.chajzer.ChajzerCommand(),
     jb2.image.dziadzius.DziadusCommand(),

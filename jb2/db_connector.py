@@ -98,7 +98,8 @@ class DatabaseConnector:
 
             return {
                 'channel_id': channel_id,
-                'is_anonymous': False
+                'is_anonymous': False,
+                'is_ranked': False
             }
 
         row = list(rows[0])
@@ -106,7 +107,8 @@ class DatabaseConnector:
 
         return {
             'channel_id': row[0],
-            'is_anonymous': row[1]
+            'is_anonymous': row[1],
+            'is_ranked': row[2]
         }
 
     def toggle_channel_anon(self, channel_id):
@@ -116,7 +118,15 @@ class DatabaseConnector:
                                         (anon ^ True, channel_id))
         self.conn.commit()
         return anon ^ True
-    
+
+    def toggle_channel_ranked(self, channel_id):
+        channel_info = self.get_channel(channel_id)
+        ranked = channel_info['is_ranked']
+        self.execute_sql_file_with_args('res/query/set_channel_ranked.sql',
+                                        (ranked ^ True, channel_id))
+        self.conn.commit()
+        return ranked ^ True
+
     def get_all_anon_channels(self):
         self.execute_sql_file('res/query/get_all_anon_channels.sql')
         rows = self.cursor.fetchall()
@@ -124,3 +134,26 @@ class DatabaseConnector:
         for row in rows:
             anon_channels.append(row[0])
         return anon_channels
+
+    def get_all_ranked_channels(self):
+        self.execute_sql_file('res/query/get_all_ranked_channels.sql')
+        rows = self.cursor.fetchall()
+        ranked_channels = []
+        for row in rows:
+            ranked_channels.append(row[0])
+        return ranked_channels
+
+    def get_user_exp(self, server_id, user_id):
+        self.execute_sql_file_with_args('res/query/get_user_exp.sql',
+                                        (server_id, user_id))
+        rows = self.cursor.fetchall()
+        if rows:
+            return rows[0]
+        
+        self.execute_sql_file_with_args('res/query/add_user.sql',
+                                        (server_id, user_id))
+
+    def set_user_exp(self, exp, lvl, server_id, user_id):
+        self.execute_sql_file_with_args('res/query/set_user_exp.sql',
+                                        (exp, lvl, server_id, user_id))
+        self.conn.commit()

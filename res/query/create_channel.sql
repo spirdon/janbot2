@@ -1,1 +1,1 @@
-INSERT INTO channels VALUES(%s, FALSE);
+INSERT INTO channels VALUES(%s, FALSE, FALSE);
