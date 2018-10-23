@@ -30,6 +30,6 @@ class Command:
         else:
             full_pattern = "^" + self.get_pattern()
 
+        print(full_pattern, msg, message.content)
         if re.match(full_pattern, msg) is not None:
-            print(full_pattern, msg, message.content)
             await self.action(connector, message, client)

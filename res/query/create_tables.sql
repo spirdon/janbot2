@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS channels(
     is_ranked BOOLEAN
 );
 
-CREATE TABLE IF NOT EXISTS users)
+CREATE TABLE IF NOT EXISTS users(
     server_id VARCHAR(255),
     user_id VARCHAR(255),
     exp INTEGER,
