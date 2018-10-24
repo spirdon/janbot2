@@ -10,6 +10,7 @@ import jb2.config.roulette
 import jb2.image.chajzer
 import jb2.image.dziadzius
 import jb2.image.cenzo
+import jb2.image.mirror
 import jb2.image.sminem
 import jb2.help
 import jb2.misc.ankieta
@@ -44,6 +45,8 @@ commands = (
     jb2.image.cenzo.CenzoCommand(connector),
     jb2.image.chajzer.ChajzerCommand(connector),
     jb2.image.dziadzius.DziadusCommand(connector),
+    jb2.image.mirror.MirrorCommand(connector),
+    jb2.image.mirror.Mirror2Command(connector),
     jb2.image.sminem.SminemCommand(connector),
     jb2.help.HelpCommand(connector),
     jb2.misc.ankieta.AnkietaCommand(connector),
@@ -56,7 +59,7 @@ commands = (
     jb2.text.gejowo.GejowoCommand(connector),
     jb2.text.przondlo.PrzondloCommand(connector),
     jb2.text.szkaluje.SzkalujeCommand(connector),
-    jb2.text.ufnal.UfnalCommand(connector)
+    #jb2.text.ufnal.UfnalCommand(connector)
 )
 
 
