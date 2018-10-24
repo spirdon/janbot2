@@ -7,6 +7,7 @@ import jb2.config.anon
 import jb2.config.prefix
 import jb2.config.ranked
 import jb2.config.roulette
+import jb2.image.avatar
 import jb2.image.chajzer
 import jb2.image.dziadzius
 import jb2.image.cenzo
@@ -42,6 +43,7 @@ commands = (
     jb2.config.roulette.RouletteStextsCommand(connector),
     jb2.config.roulette.RouletteTextsCommand(connector),
     jb2.config.roulette.RouletteEtextsCommand(connector),
+    jb2.image.avatar.AvatarCommand(connector),
     jb2.image.cenzo.CenzoCommand(connector),
     jb2.image.chajzer.ChajzerCommand(connector),
     jb2.image.dziadzius.DziadusCommand(connector),
