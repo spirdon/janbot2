@@ -12,7 +12,7 @@ class HelpCommand(jb2.command.Command):
     async def action(self, prefix, message, client):
         msg = message.content.strip()
         author_m = message.author.mention
-        pattern = self.get_full_pattern(prefix, message)
+        pattern = self.get_full_pattern(prefix)
 
         prefix = self.connector.get_server(message.server.id)['prefix']
 
@@ -26,10 +26,10 @@ class HelpCommand(jb2.command.Command):
                           value=f"`{prefix}help config`")
             emb.add_field(name=":camera_with_flash: Obrazki",
                           value=f"`{prefix}help image`")
-            emb.add_field(name=":pencil2: Tekst",
-                          value=f"`{prefix}help text`")
             emb.add_field(name=":tools: Różne",
                           value=f"`{prefix}help misc`")
+            emb.add_field(name=":pencil2: Tekst",
+                          value=f"`{prefix}help text`")
         else:
             group = group.strip()
 

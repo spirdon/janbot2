@@ -57,7 +57,7 @@ class DatabaseConnector:
                                         (server_id,))
         rows = self.cursor.fetchall()
 
-        if rows == []:
+        if not rows:
             print("** Could not find server")
             print("** Adding server to database")
             self.execute_sql_file_with_args('res/query/create_server.sql',
@@ -67,7 +67,7 @@ class DatabaseConnector:
 
             return {
                 'server_id': server_id,
-                'prefix': 'jb2_'
+                'prefix': 'jb2_',
             }
 
         row = list(rows[0])
@@ -88,7 +88,7 @@ class DatabaseConnector:
         self.execute_sql_file_with_args('res/query/find_channel.sql',
                                         (channel_id,))
         rows = self.cursor.fetchall()
-        if rows == []:
+        if not rows:
             print("** Could not find channel")
             print("** Adding server to database")
             self.execute_sql_file_with_args('res/query/create_channel.sql',
@@ -99,7 +99,8 @@ class DatabaseConnector:
             return {
                 'channel_id': channel_id,
                 'is_anonymous': False,
-                'is_ranked': False
+                'is_ranked': False,
+                'has_roulette': False
             }
 
         row = list(rows[0])
@@ -108,7 +109,8 @@ class DatabaseConnector:
         return {
             'channel_id': row[0],
             'is_anonymous': row[1],
-            'is_ranked': row[2]
+            'is_ranked': row[2],
+            'has_roulette': row[3]
         }
 
     def toggle_channel_anon(self, channel_id):
@@ -127,21 +129,28 @@ class DatabaseConnector:
         self.conn.commit()
         return ranked ^ True
 
+    def toggle_channel_roulette(self, channel_id):
+        channel_info = self.get_channel(channel_id)
+        roulette = channel_info['has_roulette']
+        self.execute_sql_file_with_args('res/query/set_channel_roulette.sql',
+                                        (roulette ^ True, channel_id))
+        self.conn.commit()
+        return roulette ^ True
+
     def get_all_anon_channels(self):
         self.execute_sql_file('res/query/get_all_anon_channels.sql')
         rows = self.cursor.fetchall()
-        anon_channels = []
-        for row in rows:
-            anon_channels.append(row[0])
-        return anon_channels
+        return [r[0] for r in rows]
 
     def get_all_ranked_channels(self):
         self.execute_sql_file('res/query/get_all_ranked_channels.sql')
         rows = self.cursor.fetchall()
-        ranked_channels = []
-        for row in rows:
-            ranked_channels.append(row[0])
-        return ranked_channels
+        return [r[0] for r in rows]
+
+    def get_all_roulette_channels(self):
+        self.execute_sql_file('res/query/get_all_roulette_channels.sql')
+        rows = self.cursor.fetchall()
+        return [r[0] for r in rows]
 
     def get_user(self, server_id, user_id):
         self.execute_sql_file_with_args('res/query/get_user.sql',
@@ -149,7 +158,7 @@ class DatabaseConnector:
         rows = self.cursor.fetchall()
         if rows:
             return rows[0]
-        
+
         self.execute_sql_file_with_args('res/query/create_user.sql',
                                         (server_id, user_id))
         return (server_id, user_id, 0, 0)
@@ -170,3 +179,49 @@ class DatabaseConnector:
         for rank in ranks:
             if rank[1] == user_id:
                 return rank[4]
+        return None
+
+    def set_role_time(self, server_id, role_name, role_time):
+        self.execute_sql_file_with_args('res/query/set_role_time.sql',
+                                        (role_time, server_id, role_name))
+        self.conn.commit()
+
+    def add_role_name(self, server_id, channel_id, role_name):
+        self.execute_sql_file_with_args('res/query/add_role_name.sql',
+                                        (server_id, channel_id, role_name))
+        self.conn.commit()
+
+    def delete_role_name(self, server_id, role_name):
+        self.execute_sql_file_with_args('res/query/delete_role_name.sql',
+                                        (role_name, server_id))
+        self.conn.commit()
+
+    def set_role_owner(self, server_id, role_name, owner_id):
+        self.execute_sql_file_with_args('res/query/set_role_owner.sql',
+                                        (owner_id, server_id, role_name))
+        self.conn.commit()
+
+    def set_role_channel(self, server_id, role_name, channel_id):
+        self.execute_sql_file_with_args('res/query/set_role_channel.sql',
+                                        (channel_id, server_id, role_name))
+        self.conn.commit()
+
+    def get_server_roles(self, server_id):
+        self.execute_sql_file_with_args('res/query/get_server_roles.sql',
+                                        (server_id,))
+        rows = self.cursor.fetchall()
+        return rows
+
+    def set_role_time_end(self, server_id, role_name, time_end):
+        self.execute_sql_file_with_args('res/query/set_role_time_end.sql',
+                                        (time_end, server_id, role_name))
+        self.conn.commit()
+
+    def set_role_stexts(self, server_id, role_name, url):
+        self.execute_sql_file_with_args('res/query/set_role_stexts.sql',
+                                        (url, server_id, role_name))
+        self.conn.commit()
+
+    def get_all_roles(self):
+        self.execute_sql_file('res/query/get_all_roles.sql')
+        return self.cursor.fetchall()

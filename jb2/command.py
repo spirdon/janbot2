@@ -14,15 +14,13 @@ class Command:
     def get_full_pattern(self, prefix):
         if self.with_prefix():
             return prefix + self.get_pattern()
-        else:
-            return self.get_pattern()
+        return self.get_pattern()
 
     async def action(self, prefix, message, client):
         pass
 
     async def process(self, prefix, message, client):
         msg = message.content
-        start_index = len(prefix)
 
         prefix = prefix.replace('$', '\\$')\
                        .replace('^', '\\^')\

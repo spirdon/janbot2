@@ -6,6 +6,7 @@ import jb2.db_connector
 import jb2.config.anon
 import jb2.config.prefix
 import jb2.config.ranked
+import jb2.config.roulette
 import jb2.image.chajzer
 import jb2.image.dziadzius
 import jb2.image.cenzo
@@ -15,6 +16,7 @@ import jb2.misc.ankieta
 import jb2.misc.rank
 import jb2.misc.ranking
 import jb2.misc.roll
+import jb2.misc.roulette
 import jb2.text.ask
 import jb2.text.elo
 import jb2.text.gejowo
@@ -32,6 +34,11 @@ commands = (
     jb2.config.prefix.PrefixCommand(connector),
     jb2.config.ranked.ExpCommand(connector),
     jb2.config.ranked.ToggleRankCommand(connector),
+    jb2.config.roulette.ToggleRouletteCommand(connector),
+    jb2.config.roulette.RouletteTimeCommand(connector),
+    jb2.config.roulette.RouletteAddCommand(connector),
+    jb2.config.roulette.RouletteDeleteCommand(connector),
+    jb2.config.roulette.RouletteStextsCommand(connector),
     jb2.image.cenzo.CenzoCommand(connector),
     jb2.image.chajzer.ChajzerCommand(connector),
     jb2.image.dziadzius.DziadusCommand(connector),
@@ -41,6 +48,7 @@ commands = (
     jb2.misc.rank.RankCommand(connector),
     jb2.misc.ranking.RankingCommand(connector),
     jb2.misc.roll.RollCommand(connector),
+    jb2.misc.roulette.RouletteCommand(connector),
     jb2.text.ask.AskCommand(connector),
     jb2.text.elo.EloCommand(connector),
     jb2.text.gejowo.GejowoCommand(connector),
@@ -57,6 +65,9 @@ async def on_ready():
     connector.create_tables()
     print("-------")
     print("* Ready")
+
+    # Start listening to roles
+    await jb2.config.roulette.RoleListener(connector, client).listen()
 
 
 @client.event

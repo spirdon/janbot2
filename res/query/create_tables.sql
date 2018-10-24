@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS servers(
 CREATE TABLE IF NOT EXISTS channels(
     channel_id VARCHAR(255),
     is_anonymous BOOLEAN,
-    is_ranked BOOLEAN
+    is_ranked BOOLEAN,
+    has_roulette BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS users(
@@ -14,4 +15,16 @@ CREATE TABLE IF NOT EXISTS users(
     user_id VARCHAR(255),
     exp INTEGER,
     lvl INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS roles(
+    server_id VARCHAR(255),
+    channel_id VARCHAR(255),
+    role_name VARCHAR(255),
+    owner_id VARCHAR(255),
+    role_time INTEGER,
+    time_end INTEGER,
+    stexts_url VARCHAR(255),
+    texts_url VARCHAR(255),
+    etexts_url VARCHAR(255)
 );
