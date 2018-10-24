@@ -39,6 +39,8 @@ commands = (
     jb2.config.roulette.RouletteAddCommand(connector),
     jb2.config.roulette.RouletteDeleteCommand(connector),
     jb2.config.roulette.RouletteStextsCommand(connector),
+    jb2.config.roulette.RouletteTextsCommand(connector),
+    jb2.config.roulette.RouletteEtextsCommand(connector),
     jb2.image.cenzo.CenzoCommand(connector),
     jb2.image.chajzer.ChajzerCommand(connector),
     jb2.image.dziadzius.DziadusCommand(connector),
@@ -54,7 +56,7 @@ commands = (
     jb2.text.gejowo.GejowoCommand(connector),
     jb2.text.przondlo.PrzondloCommand(connector),
     jb2.text.szkaluje.SzkalujeCommand(connector),
-    #jb2.text.ufnal.UfnalCommand(connector)
+    jb2.text.ufnal.UfnalCommand(connector)
 )
 
 

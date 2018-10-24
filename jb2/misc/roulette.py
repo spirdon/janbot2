@@ -25,6 +25,7 @@ class RouletteCommand(jb2.command.Command):
         if message.channel.id not in channels:
             text = "Na tym kanale ruletka jest wyłączona"
             emb = jb2.embed.error_embed(author_m, text)
+            await client.send_message(message.channel, embed=emb)
             return
 
         if role_name is None:

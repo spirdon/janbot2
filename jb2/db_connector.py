@@ -222,6 +222,16 @@ class DatabaseConnector:
                                         (url, server_id, role_name))
         self.conn.commit()
 
+    def set_role_texts(self, server_id, role_name, url):
+        self.execute_sql_file_with_args('res/query/set_role_texts.sql',
+                                        (url, server_id, role_name))
+        self.conn.commit()
+
+    def set_role_etexts(self, server_id, role_name, url):
+        self.execute_sql_file_with_args('res/query/set_role_etexts.sql',
+                                        (url, server_id, role_name))
+        self.conn.commit()
+
     def get_all_roles(self):
         self.execute_sql_file('res/query/get_all_roles.sql')
         return self.cursor.fetchall()

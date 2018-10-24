@@ -172,7 +172,7 @@ class RouletteStextsCommand(jb2.command.Command):
                 url = url.strip()
                 roles = self.connector.get_server_roles(message.server.id)
                 role_name = role_name.strip()
-                role_names = [r[1] for r in roles]
+                role_names = [r[2] for r in roles]
                 role = discord.utils.get(message.server.roles, name=role_name)
                 if role_name not in role_names or not role:
                     text = "Nie można ustawić tekstu do tej roli: **{}**"
@@ -221,7 +221,7 @@ class RouletteTextsCommand(jb2.command.Command):
                 url = url.strip()
                 roles = self.connector.get_server_roles(message.server.id)
                 role_name = role_name.strip()
-                role_names = [r[1] for r in roles]
+                role_names = [r[2] for r in roles]
                 role = discord.utils.get(message.server.roles, name=role_name)
                 if role_name not in role_names or not role:
                     text = "Nie można ustawić tekstu do tej roli: **{}**"
@@ -270,7 +270,7 @@ class RouletteEtextsCommand(jb2.command.Command):
                 url = url.strip()
                 roles = self.connector.get_server_roles(message.server.id)
                 role_name = role_name.strip()
-                role_names = [r[1] for r in roles]
+                role_names = [r[2] for r in roles]
                 role = discord.utils.get(message.server.roles, name=role_name)
                 if role_name not in role_names or not role:
                     text = "Nie można ustawić tekstu do tej roli: **{}**"
@@ -299,7 +299,7 @@ class RoleListener:
 
     async def listen(self):
         while True:
-            await asyncio.sleep(5)
+            await asyncio.sleep(3600)
             all_roles = self.connector.get_all_roles()
             roulette_channels = self.connector.get_all_roulette_channels()
 
@@ -337,6 +337,7 @@ class RoleListener:
                         rand_text = random.choice(content)
                         desc = rand_text.format("<@{}>".format(owner_id))
                     emb.description = desc
+                    emb.title = ":reminder_ribbon: Ruletka"
                     await self.client.send_message(channel, embed=emb)
                 elif owner_id:
                     self.connector.set_role_owner(server_id,
@@ -361,4 +362,5 @@ class RoleListener:
                         rand_text = random.choice(content)
                         desc = rand_text.format("<@{}>".format(owner_id))
                     emb.description = desc
+                    emb.title = ":reminder_ribbon: Ruletka"
                     await self.client.send_message(channel, embed=emb)
