@@ -7,7 +7,6 @@ import jb2.config.anon
 import jb2.config.prefix
 import jb2.config.ranked
 import jb2.config.roulette
-import jb2.config.server
 import jb2.faceapp.faceapp
 import jb2.image.avatar
 import jb2.image.chajzer
@@ -16,6 +15,8 @@ import jb2.image.cenzo
 import jb2.image.flip
 import jb2.image.mirror
 import jb2.image.sminem
+import jb2.info.channel
+import jb2.info.server
 import jb2.help
 import jb2.misc.ankieta
 import jb2.misc.rank
@@ -47,7 +48,6 @@ commands = (
     jb2.config.roulette.RouletteStextsCommand(connector),
     jb2.config.roulette.RouletteTextsCommand(connector),
     jb2.config.roulette.RouletteEtextsCommand(connector),
-    jb2.config.server.ServerInfoCommand(connector),
     jb2.faceapp.faceapp.FaceappCommand(connector),
     jb2.image.avatar.AvatarCommand(connector),
     jb2.image.cenzo.CenzoCommand(connector),
@@ -58,6 +58,8 @@ commands = (
     jb2.image.mirror.MirrorCommand(connector),
     jb2.image.mirror.Mirror2Command(connector),
     jb2.image.sminem.SminemCommand(connector),
+    jb2.info.channel.ChannelInfoCommand(connector),
+    jb2.info.server.ServerInfoCommand(connector),
     jb2.help.HelpCommand(connector),
     jb2.misc.ankieta.AnkietaCommand(connector),
     jb2.misc.rank.RankCommand(connector),
