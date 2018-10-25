@@ -1,0 +1,6 @@
+bs4==0.0.1
+discord==0.0.2
+faces==0.1.0
+psycopg2==2.7.4
+requests==2.18.4
+Pillow==5.2.0
