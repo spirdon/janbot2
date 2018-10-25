@@ -337,7 +337,11 @@ class RoleListener:
                         desc = rand_text.format("<@{}>".format(owner_id))
                     emb.description = desc
                     emb.title = ":reminder_ribbon: Ruletka"
-                    await self.client.send_message(channel, embed=emb)
+
+                    try:
+                        await self.client.send_message(channel, embed=emb)
+                    except discord.errors.InvalidArgument:
+                        print("* Could not send message to channel, removed?")
                 elif owner_id:
                     self.connector.set_role_owner(server_id,
                                                   role_name,
@@ -362,5 +366,8 @@ class RoleListener:
                         desc = rand_text.format("<@{}>".format(owner_id))
                     emb.description = desc
                     emb.title = ":reminder_ribbon: Ruletka"
-                    await self.client.send_message(channel, embed=emb)
+                    try:
+                        await self.client.send_message(channel, embed=emb)
+                    except discord.errors.InvalidArgument:
+                        print("* Could not send message to channel, removed?")
             await asyncio.sleep(3600)

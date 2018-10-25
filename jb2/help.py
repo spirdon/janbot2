@@ -65,7 +65,7 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
 
 **`{0}faceapp <filter> [<url>]`** - twarz zmodyfikowana przez filtr FaceAppa
 `filter` - jeden z podanych filtrów: 
-- smile
+*- smile
 - smile_2
 - hot
 - old
@@ -78,7 +78,7 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
 - heisenberg
 - female
 - female_2
-- male
+- male*
 `url` - adres URL do obrazka
                 """.format(prefix)
             elif group == "image":
