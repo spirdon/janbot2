@@ -34,6 +34,7 @@ class ServerInfoCommand(jb2.command.Command):
                     desc += m.mention + " "
             desc += "\n"
         desc += "**Prefiks**: `" + server_info['prefix'] + "`\n"
+        desc += "**Kudo cooldown**: " + server_info['cooldown'] + " s\n"
 
         desc += "**Emoji**:\n"
         for e in server.emojis:

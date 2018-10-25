@@ -4,6 +4,7 @@ import jb2.client
 import jb2.db_connector
 
 import jb2.config.anon
+import jb2.config.cooldown
 import jb2.config.prefix
 import jb2.config.ranked
 import jb2.config.roulette
@@ -41,6 +42,7 @@ connector = jb2.db_connector.DatabaseConnector()
 commands = (
     jb2.config.anon.AnonimizeCommand(connector),
     jb2.config.anon.ToggleAnonCommand(connector),
+    jb2.config.cooldown.CooldownCommand(connector),
     jb2.config.prefix.PrefixCommand(connector),
     jb2.config.ranked.ExpCommand(connector),
     jb2.config.ranked.ToggleRankCommand(connector),
