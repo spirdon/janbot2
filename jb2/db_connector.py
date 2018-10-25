@@ -186,7 +186,13 @@ class DatabaseConnector:
         self.conn.commit()
 
     def get_ranks(self, server_id):
-        self.execute_sql_file_with_args('res/query/get_user_rank.sql',
+        self.execute_sql_file_with_args('res/query/get_user_ranks.sql',
+                                        (server_id,))
+        rows = self.cursor.fetchall()
+        return rows
+
+    def get_kudos(self, server_id):
+        self.execute_sql_file_with_args('res/query/get_user_kudos.sql',
                                         (server_id,))
         rows = self.cursor.fetchall()
         return rows
