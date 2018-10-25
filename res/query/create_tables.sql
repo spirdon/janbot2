@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS servers(
     server_id VARCHAR(255),
-    prefix VARCHAR(255)
+    prefix VARCHAR(255),
+    cooldown INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS channels(
@@ -14,7 +15,9 @@ CREATE TABLE IF NOT EXISTS users(
     server_id VARCHAR(255),
     user_id VARCHAR(255),
     exp INTEGER,
-    lvl INTEGER
+    lvl INTEGER,
+    kudos INTEGER,
+    cooldown_end INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS roles(

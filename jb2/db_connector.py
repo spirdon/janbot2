@@ -68,6 +68,7 @@ class DatabaseConnector:
             return {
                 'server_id': server_id,
                 'prefix': 'jb2_',
+                'cooldown': 21600
             }
 
         row = list(rows[0])
@@ -75,12 +76,18 @@ class DatabaseConnector:
 
         return {
             'server_id': row[0],
-            'prefix': row[1]
+            'prefix': row[1],
+            'cooldown': row[2]
         }
 
     def set_server_prefix(self, server_id, prefix):
         self.execute_sql_file_with_args('res/query/set_server_prefix.sql',
                                         (prefix, server_id))
+        self.conn.commit()
+
+    def set_server_cooldown(self, cooldown, server_id):
+        self.execute_sql_file_with_args('res/query/set_server_cooldown.sql',
+                                        (cooldown, server_id,))
         self.conn.commit()
 
     def get_channel(self, channel_id):
@@ -161,11 +168,21 @@ class DatabaseConnector:
 
         self.execute_sql_file_with_args('res/query/create_user.sql',
                                         (server_id, user_id))
-        return (server_id, user_id, 0, 0)
+        return (server_id, user_id, 0, 0, 0)
 
     def set_user_exp(self, exp, lvl, server_id, user_id):
         self.execute_sql_file_with_args('res/query/set_user_exp.sql',
                                         (exp, lvl, server_id, user_id))
+        self.conn.commit()
+
+    def set_user_kudos(self, kudos, server_id, user_id):
+        self.execute_sql_file_with_args('res/query/set_user_kudos.sql',
+                                        (kudos, server_id, user_id))
+        self.conn.commit()
+
+    def set_user_cooldown_end(self, cooldown_end, server_id, user_id):
+        self.execute_sql_file_with_args('res/query/set_user_cooldown_end.sql',
+                                        (cooldown_end, server_id, user_id))
         self.conn.commit()
 
     def get_ranks(self, server_id):

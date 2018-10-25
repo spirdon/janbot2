@@ -20,6 +20,7 @@ import jb2.info.role
 import jb2.info.server
 import jb2.help
 import jb2.misc.ankieta
+import jb2.misc.kudo
 import jb2.misc.rank
 import jb2.misc.ranking
 import jb2.misc.roll
@@ -64,6 +65,7 @@ commands = (
     jb2.info.server.ServerInfoCommand(connector),
     jb2.help.HelpCommand(connector),
     jb2.misc.ankieta.AnkietaCommand(connector),
+    jb2.misc.kudo.KudoCommand(connector),
     jb2.misc.rank.RankCommand(connector),
     jb2.misc.ranking.RankingCommand(connector),
     jb2.misc.roll.RollCommand(connector),

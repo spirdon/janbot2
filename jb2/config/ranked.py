@@ -54,8 +54,6 @@ class ExpCommand(jb2.command.Command):
         exp = c_exp + exp_added
         lvl = get_lvl_from_exp(exp)
 
-        print(c_exp, c_lvl, ";", exp, lvl)
-
         self.connector.set_user_exp(exp, lvl, server_id, user_id)
 
         if lvl > c_lvl:

@@ -25,7 +25,7 @@ class RankingCommand(jb2.command.Command):
                 break
 
         emb = discord.Embed(description=desc)
-        emb.title = ":star: Ranking punktów"
+        emb.title = ":star: Ranking poziomów"
         emb.colour = 0x00ffff
         footer_text = "Ranking dla " + str(message.author)
         emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)
