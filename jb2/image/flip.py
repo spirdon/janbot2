@@ -31,11 +31,11 @@ class FlipCommand(jb2.command.Command):
                 image_url = message.attachments[0]['url']
                 await self.mirror_image(message, client, image_url)
         else:
-            url = url.strip().split('?')[0]
             await self.mirror_image(message, client, url)
 
     async def mirror_image(self, message, client, url):
-        extension = url.split('.')[-1]
+        url_copy = url.strip().split('?')[0]
+        extension = url_copy.split('.')[-1]
         full_path = 'res/temp/image.' + extension
 
         try:

@@ -32,11 +32,11 @@ class CenzoCommand(jb2.command.Command):
                 image_url = message.attachments[0]['url']
                 await self.papiezify(message, client, image_url)
         else:
-            url = url.strip().split('?')[0]
             await self.papiezify(message, client, url)
 
     async def papiezify(self, message, client, url):
-        extension = url.split('.')[-1]
+        url_copy = url.strip().split('?')[0]
+        extension = url_copy.split('.')[-1]
         full_path = 'res/temp/image.' + extension
         papaj_path = 'res/images/papaj.png'
         cascade_path = 'res/xml/haarcascade_frontalface_default.xml'

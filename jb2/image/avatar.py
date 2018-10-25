@@ -21,6 +21,7 @@ class AvatarCommand(jb2.command.Command):
             user = server.get_member(user_id)
 
         avatar_url = self.get_avatar_url(user)
+        avatar_url = avatar_url.replace(".webp", ".png")
 
         emb = discord.Embed()
         emb.set_footer(text="Awatar dla " + str(message.author),

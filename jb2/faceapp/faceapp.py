@@ -38,11 +38,11 @@ class FaceappCommand(jb2.command.Command):
                                          filter_name, image_url)
         else:
             filter_name = filter_name.strip()
-            url = url.strip().split('?')[0]
             await self.faceapp_image(message, client, filter_name, url)
 
     async def faceapp_image(self, message, client, filter, url):
-        extension = url.split('.')[-1]
+        url_copy = url.strip().split('?')[0]
+        extension = url_copy.split('.')[-1]
         full_path = 'res/temp/image.' + extension
 
         try:
