@@ -21,6 +21,7 @@ import jb2.misc.ranking
 import jb2.misc.roll
 import jb2.misc.roulette
 import jb2.text.ask
+import jb2.text.choice
 import jb2.text.elo
 import jb2.text.gejowo
 import jb2.text.przondlo
@@ -60,6 +61,7 @@ commands = (
     jb2.misc.roll.RollCommand(connector),
     jb2.misc.roulette.RouletteCommand(connector),
     jb2.text.ask.AskCommand(connector),
+    jb2.text.choice.ChoiceCommand(connector),
     jb2.text.elo.EloCommand(connector),
     jb2.text.gejowo.GejowoCommand(connector),
     jb2.text.przondlo.PrzondloCommand(connector),

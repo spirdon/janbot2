@@ -8,11 +8,11 @@ import jb2.embed
 
 class AskCommand(jb2.command.Command):
     def __init__(self, connector):
-        with open('res/text/answers.txt') as file:
+        with open('res/text/odpowiedzi.txt') as file:
             self.answers = file.readlines()
 
     def get_pattern(self):
-        return r'ask( .+)?$'
+        return r'spytaj( .+)?$'
 
     async def action(self, prefix, message, client):
         msg = message.content.strip()
@@ -22,7 +22,7 @@ class AskCommand(jb2.command.Command):
         question = re.match("^" + pattern, msg).group(1)
 
         if question is None:
-            text = "Potrzebny parametr: **question**"
+            text = "Potrzebny parametr: **pytanie**"
             emb = jb2.embed.error_embed(author_m, text)
         else:
             emoji = ":8ball:"
