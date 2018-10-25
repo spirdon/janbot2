@@ -235,3 +235,11 @@ class DatabaseConnector:
     def get_all_roles(self):
         self.execute_sql_file('res/query/get_all_roles.sql')
         return self.cursor.fetchall()
+
+    def get_role(self, server_id, role_name):
+        self.execute_sql_file_with_args('res/query/get_role.sql',
+                                        (server_id, role_name))
+        rows = self.cursor.fetchall()
+        if rows:
+            return rows[0]
+        return None
