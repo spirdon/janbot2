@@ -5,6 +5,7 @@ import discord
 
 from bs4 import BeautifulSoup
 
+import jb2.client
 import jb2.command
 import jb2.embed
 
@@ -15,7 +16,7 @@ class ImgurCommand(jb2.command.Command):
 
     async def action(self, prefix, message, client):
         print(message.channel.name)
-        if 'nsfw' not in message.channel.name:
+        if not await jb2.client.is_nsfw(message.channel):
             text = "Komenda działa tylko na kanale NSFW."
             emb = jb2.embed.error_embed(message.author.mention, text)
         else:
