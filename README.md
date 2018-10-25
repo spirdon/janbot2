@@ -1,2 +1,5 @@
 # janbot2
-A discord bot written in Python 3.
+Discordowo-chanowy bot memiczny.
+
+## Który bot to ten prawdziwy?
+Niesforkowany, oryginalny bot ma ID **Jan Bot2#1377**. Jemu możesz zaufać.
