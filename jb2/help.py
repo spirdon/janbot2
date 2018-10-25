@@ -114,7 +114,8 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
                 emb.description = """
 **`{0}channel`** - postuje informacje o kanale
 
-**`{0}role`** - postuje informacje o roli dodanej do ruletki
+**`{0}role <role_name>`** - postuje informacje o roli dodanej do ruletki
+`role_name` - nazwa roli, która została dodana do ruletki
 
 **`{0}server`** - postuje informacje o serwerze
                 """.format(prefix)
