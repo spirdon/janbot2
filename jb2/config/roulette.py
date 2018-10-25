@@ -299,7 +299,6 @@ class RoleListener:
 
     async def listen(self):
         while True:
-            await asyncio.sleep(3600)
             all_roles = self.connector.get_all_roles()
             roulette_channels = self.connector.get_all_roulette_channels()
 
@@ -364,3 +363,4 @@ class RoleListener:
                     emb.description = desc
                     emb.title = ":reminder_ribbon: Ruletka"
                     await self.client.send_message(channel, embed=emb)
+            await asyncio.sleep(3600)
