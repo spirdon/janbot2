@@ -27,6 +27,7 @@ import jb2.misc.ranking
 import jb2.misc.roll
 import jb2.misc.roulette
 import jb2.misc.top_kudos
+import jb2.nsfw.imgur
 import jb2.text.ask
 import jb2.text.choice
 import jb2.text.elo
@@ -74,6 +75,7 @@ commands = (
     jb2.misc.roll.RollCommand(connector),
     jb2.misc.roulette.RouletteCommand(connector),
     jb2.misc.top_kudos.TopKudosCommand(connector),
+    jb2.nsfw.imgur.ImgurCommand(connector),
     jb2.text.ask.AskCommand(connector),
     jb2.text.choice.ChoiceCommand(connector),
     jb2.text.elo.EloCommand(connector),
