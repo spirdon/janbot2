@@ -1,5 +1,5 @@
 python3.6
-pip3.6
+pip
 libsm6
 libxrender1
 libfontconfig1
