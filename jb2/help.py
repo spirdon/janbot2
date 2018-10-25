@@ -33,7 +33,7 @@ class HelpCommand(jb2.command.Command):
             emb.add_field(name=":tools: Różne",
                           value=f"`{prefix}help misc`")
             emb.add_field(name=":no_entry_sign: NSFW",
-                          value=f"`{prefix}help misc`")
+                          value=f"`{prefix}help nsfw`")
             emb.add_field(name=":pencil2: Tekst",
                           value=f"`{prefix}help text`")
         else:
