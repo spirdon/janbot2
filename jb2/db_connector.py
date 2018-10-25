@@ -168,7 +168,7 @@ class DatabaseConnector:
 
         self.execute_sql_file_with_args('res/query/create_user.sql',
                                         (server_id, user_id))
-        return (server_id, user_id, 0, 0, 0)
+        return (server_id, user_id, 0, 0, 0, 21600)
 
     def set_user_exp(self, exp, lvl, server_id, user_id):
         self.execute_sql_file_with_args('res/query/set_user_exp.sql',
