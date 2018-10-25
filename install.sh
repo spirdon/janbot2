@@ -1,2 +1,2 @@
 #!/bin/sh
-pip install git+https://github.com/vasilysinitsin/Faces.git
+pip3.6 install git+https://github.com/vasilysinitsin/Faces.git
