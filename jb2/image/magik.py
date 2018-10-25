@@ -60,6 +60,7 @@ class MagikCommand(jb2.command.Command):
         n_width = 150
         w_percent = n_width / width
         n_height = int(height * w_percent)
+        n_height = min(150, n_height)
 
         img = img.resize((n_width, n_height), Image.ANTIALIAS)
         img.save(full_path)
