@@ -11,6 +11,7 @@ import jb2.image.avatar
 import jb2.image.chajzer
 import jb2.image.dziadzius
 import jb2.image.cenzo
+import jb2.image.flip
 import jb2.image.mirror
 import jb2.image.sminem
 import jb2.help
@@ -47,6 +48,8 @@ commands = (
     jb2.image.cenzo.CenzoCommand(connector),
     jb2.image.chajzer.ChajzerCommand(connector),
     jb2.image.dziadzius.DziadusCommand(connector),
+    jb2.image.flip.FlipCommand(connector),
+    jb2.image.flip.Flip2Command(connector),
     jb2.image.mirror.MirrorCommand(connector),
     jb2.image.mirror.Mirror2Command(connector),
     jb2.image.sminem.SminemCommand(connector),
