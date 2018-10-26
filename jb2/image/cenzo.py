@@ -63,6 +63,13 @@ class CenzoCommand(jb2.command.Command):
                 minSize=(30, 30),
                 flags=cv2.CASCADE_SCALE_IMAGE
             )
+
+            if not faces:
+                text = "Nie wykryto twarzy"
+                emb = jb2.embed.error_embed(message.author.mention, text)
+                await client.send_message(message.channel, embed=emb)
+                return
+
             for (x, y, w, h) in faces:
                 x_o = int(0.15 * w)
                 y_o = int(0.2 * h)

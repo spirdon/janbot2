@@ -21,6 +21,13 @@ class KudoCommand(jb2.command.Command):
             text = "Potrzebny parametr: **member**"
             emb = jb2.embed.error_embed(author_m, text)
         else:
+            if user_id == message.author.id:
+                text = "Nie możesz sobie samemu dać kudosa"
+                emb = jb2.embed.error_embed(author_m, text)
+                await client.send_message(message.channel, embed=emb)
+                return
+
+
             cooldown_end = self.connector.get_user(server.id,
                                                    message.author.id)[5]
 
