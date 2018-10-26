@@ -12,7 +12,7 @@ class AskCommand(jb2.command.Command):
             self.answers = file.readlines()
 
     def get_pattern(self):
-        return r'spytaj( .+)?$'
+        return r'ask( .+)?$'
 
     async def action(self, prefix, message, client):
         msg = message.content.strip()
@@ -22,7 +22,7 @@ class AskCommand(jb2.command.Command):
         question = re.match("^" + pattern, msg).group(1)
 
         if question is None:
-            text = "Potrzebny parametr: **pytanie**"
+            text = "Potrzebny parametr: **question**"
             emb = jb2.embed.error_embed(author_m, text)
         else:
             emoji = ":8ball:"
