@@ -15,7 +15,6 @@ class ImgurCommand(jb2.command.Command):
         return r'imgur$'
 
     async def action(self, prefix, message, client):
-        print(message.channel.name)
         if not await jb2.client.is_nsfw(message.channel):
             text = "Komenda działa tylko na kanale NSFW."
             emb = jb2.embed.error_embed(message.author.mention, text)
@@ -48,5 +47,4 @@ class ImgurCommand(jb2.command.Command):
                 link = "http://i.imgur.com/{}.{}".format(index, ext)
                 headers = requests.head(link).headers
                 if 'Content-Type' in headers:
-                    print(link)
                     return link
