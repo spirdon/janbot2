@@ -79,7 +79,7 @@ class FaceappCommand(jb2.command.Command):
             text = "Coś poszło nie tak"
             emb = jb2.embed.error_embed(message.author.mention, text)
             await client.send_message(message.channel, embed=emb)
-        except ValueError:
+        except ValueError as e:
             text = "Nieprawidłowy URL"
             emb = jb2.embed.error_embed(message.author.mention, text)
             await client.send_message(message.channel, embed=emb)
