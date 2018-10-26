@@ -1,7 +1,9 @@
 import os
+import time
 
 import jb2.client
 import jb2.db_connector
+import jb2.embed
 
 import jb2.config.anon
 import jb2.config.cooldown
@@ -88,7 +90,7 @@ commands = (
     jb2.text.szkaluje.SzkalujeCommand(connector),
     jb2.text.ufnal.UfnalCommand(connector)
 )
-
+locked = {}
 
 @client.event
 async def on_ready():
@@ -116,17 +118,30 @@ async def on_message(message):
 
     # Get server prefix
     prefix = connector.get_server(message.server.id)['prefix']
+    msg = message.content
+
+    if message.author.id not in locked:
+        locked[message.author.id] = False
+
+    if locked[message.author.id]:
+        text = "Poczekaj aż poprzednia komenda się wykona"
+        emb = jb2.embed.error_embed(message.author.mention, text)
+        await client.send_message(message.channel, embed=emb)
+        return
+
+    if msg.startswith(prefix):
+        locked[message.author.id] = True
 
     # Process all commands (run them if regex is ok)
     for command in commands:
         await command.process(prefix, message, client)
 
+    if msg.startswith(prefix):
+        locked[message.author.id] = False
+
 
 def main():
-    try:
-        client.run(os.getenv('TOKEN'))
-    except Exception as exception:
-        print("# Exception: " + str(exception))
+    client.run(os.getenv('TOKEN'))
 
 
 if __name__ == "__main__":

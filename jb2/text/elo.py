@@ -8,6 +8,7 @@ import jb2.embed
 
 class EloCommand(jb2.command.Command):
     def __init__(self, connector):
+        self.connector = connector
         with open('res/text/elo_odpowiedzi.txt') as file:
             self.answers = file.readlines()
 

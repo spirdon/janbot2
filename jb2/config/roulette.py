@@ -298,8 +298,10 @@ class RoleListener:
         self.client = client
 
     async def listen(self):
+        time_elapsed = 0
         while True:
-            await asyncio.sleep(3600 * 3)
+            await asyncio.sleep(30)
+            time_elapsed += 30
             all_roles = self.connector.get_all_roles()
             roulette_channels = self.connector.get_all_roulette_channels()
 
@@ -309,11 +311,14 @@ class RoleListener:
                 role_name = role[2]
                 owner_id = role[3]
 
-                prefix = self.connector.get_server(server_id)['prefix']
-                prefix = prefix.replace('\\', '')
+                if not owner_id:
+                    continue
 
                 if channel_id not in roulette_channels:
                     continue
+
+                prefix = self.connector.get_server(server_id)['prefix']
+                prefix = prefix.replace('\\', '')
 
                 time_end = role[5]
                 texts_url = role[7]
@@ -324,7 +329,11 @@ class RoleListener:
 
                 emb = discord.Embed()
 
-                if time.time() < time_end:
+                time_ends = time.time() >= time_end
+
+                if not time_ends and time_elapsed >= 3600 * 3:
+                    time_elapsed = 0
+
                     if str(owner.status) == "offline":
                         continue
 
@@ -347,10 +356,8 @@ class RoleListener:
                         await self.client.send_message(channel, embed=emb)
                     except discord.errors.InvalidArgument:
                         print("* Could not send message to channel, removed?")
-                elif owner_id:
-                    self.connector.set_role_owner(server_id,
-                                                  role_name,
-                                                  '')
+                elif time_ends:
+                    self.connector.set_role_owner(server_id, role_name, '')
                     member = server.get_member(owner_id)
 
                     role = discord.utils.get(server.roles,
