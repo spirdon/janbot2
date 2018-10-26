@@ -106,6 +106,9 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
 **`{0}mirror2 [<url>]`** - odbija wewnętrzne połowy obrazka
 `url` - adres URL obrazka
 
+**`{0}npc [<text>]`** - postuje memix z NPC
+`text` - tekst który ma zostać wypowiedziany przez NPC
+
 **`{0}sminem`** - postuje losowego Sminema
                 """.format(prefix)
             elif group == "info":
@@ -127,7 +130,7 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
 `question` - pytanie (musi po nim być dwukropek)
 `options` - odpowiedzi oddzielone znakiem plusa (+)
 
-**`{0}kudo <member>`** - daje kudosa użytkownikowi
+**`{0}kudo` <member>** - daje kudosa użytkownikowi
 `member` - wzmianka użytkownika, który ma dostać kudosa
 
 **`{0}rank [<member>]`** - wyświetla profil użytkownika
