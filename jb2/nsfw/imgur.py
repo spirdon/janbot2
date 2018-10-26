@@ -25,7 +25,9 @@ class ImgurCommand(jb2.command.Command):
             emb = discord.Embed(color=0x00ff00)
             emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)
             emb.title = ":frame_photo: Losowy obrazek z Imgura"
-            emb.set_image(url=self.random_imgur_url())
+            url = self.random_imgur_url()
+            emb.description = url
+            emb.set_image(url=url)
 
         await client.send_message(message.channel, embed=emb)
 
@@ -46,6 +48,7 @@ class ImgurCommand(jb2.command.Command):
                 link = "http://i.imgur.com/{}.{}".format(index, ext)
                 headers = requests.head(link).headers
                 if 'Content-Type' in headers:
+                    print(link)
                     return link
                 else:
                     continue

@@ -299,6 +299,7 @@ class RoleListener:
 
     async def listen(self):
         while True:
+            await asyncio.sleep(3600)
             all_roles = self.connector.get_all_roles()
             roulette_channels = self.connector.get_all_roulette_channels()
 
@@ -370,4 +371,3 @@ class RoleListener:
                         await self.client.send_message(channel, embed=emb)
                     except discord.errors.InvalidArgument:
                         print("* Could not send message to channel, removed?")
-            await asyncio.sleep(3600)

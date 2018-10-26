@@ -127,7 +127,7 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
 `question` - pytanie (musi po nim być dwukropek)
 `options` - odpowiedzi oddzielone znakiem plusa (+)
 
-**`{0}kudo` <member>** - daje kudosa użytkownikowi
+**`{0}kudo <member>`** - daje kudosa użytkownikowi
 `member` - wzmianka użytkownika, który ma dostać kudosa
 
 **`{0}rank [<member>]`** - wyświetla profil użytkownika
