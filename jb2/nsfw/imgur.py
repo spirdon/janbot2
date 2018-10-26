@@ -50,5 +50,3 @@ class ImgurCommand(jb2.command.Command):
                 if 'Content-Type' in headers:
                     print(link)
                     return link
-                else:
-                    continue
