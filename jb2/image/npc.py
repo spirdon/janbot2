@@ -43,7 +43,7 @@ class NpcCommand(jb2.command.Command):
 
     def draw_image(self, text):
         img = Image.open(self.template_path)
-        lines = textwrap.wrap(text, width=27)
+        lines = textwrap.wrap(text, width=26)
         draw = ImageDraw.Draw(img, "RGB")
 
         if lines[0].strip().startswith('>'):
