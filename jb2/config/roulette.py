@@ -299,7 +299,7 @@ class RoleListener:
 
     async def listen(self):
         while True:
-            await asyncio.sleep(3600)
+            await asyncio.sleep(3600 * 3)
             all_roles = self.connector.get_all_roles()
             roulette_channels = self.connector.get_all_roulette_channels()
 
@@ -320,10 +320,14 @@ class RoleListener:
                 etexts_url = role[8]
                 channel = self.client.get_channel(channel_id)
                 server = self.client.get_server(server_id)
+                owner = server.get_member(owner_id)
 
                 emb = discord.Embed()
 
                 if time.time() < time_end:
+                    if str(owner.status) == "offline":
+                        continue
+
                     if not texts_url:
                         footer_text = "Zmień domyślny tekst za pomocą " +\
                                       prefix + "roulette texts " + \
