@@ -16,6 +16,7 @@ import jb2.image.cenzo
 import jb2.image.flip
 import jb2.image.magik
 import jb2.image.mirror
+import jb2.image.npc
 import jb2.image.sminem
 import jb2.info.channel
 import jb2.info.role
@@ -65,6 +66,7 @@ commands = (
     jb2.image.magik.MagikCommand(connector),
     jb2.image.mirror.MirrorCommand(connector),
     jb2.image.mirror.Mirror2Command(connector),
+    jb2.image.npc.NpcCommand(connector),
     jb2.image.sminem.SminemCommand(connector),
     jb2.info.channel.ChannelInfoCommand(connector),
     jb2.info.role.RoleInfoCommand(connector),
@@ -84,7 +86,7 @@ commands = (
     jb2.text.gejowo.GejowoCommand(connector),
     jb2.text.przondlo.PrzondloCommand(connector),
     jb2.text.szkaluje.SzkalujeCommand(connector),
-    jb2.text.ufnal.UfnalCommand(connector)
+    #jb2.text.ufnal.UfnalCommand(connector)
 )
 
 

@@ -51,7 +51,7 @@ class CenzoCommand(jb2.command.Command):
                 text = "Nie można było pobrać obrazka"
                 emb = jb2.embed.error_embed(message.author.mention, text)
                 await client.send_message(message.channel, embed=emb)
-                raise Exception
+                return
 
             img = cv2.imread(full_path, cv2.IMREAD_UNCHANGED)
             face_cascade = cv2.CascadeClassifier(cascade_path)
@@ -65,7 +65,7 @@ class CenzoCommand(jb2.command.Command):
             )
 
             if not faces:
-                text = "Nie wykryto twarzy"
+                text = "Nie znaleziono twarzy"
                 emb = jb2.embed.error_embed(message.author.mention, text)
                 await client.send_message(message.channel, embed=emb)
                 return
@@ -83,9 +83,13 @@ class CenzoCommand(jb2.command.Command):
 
                 image.paste(papaj, (x - x_o, y - y_o), mask=papaj)
                 image.save(full_path)
-            
+     
             await client.send_file(message.channel, full_path)
-        except ValueError:
+        except requests.exceptions.MissingSchema:
             text = "Nieprawidłowy URL"
+            emb = jb2.embed.error_embed(message.author.mention, text)
+            await client.send_message(message.channel, embed=emb)
+        except Exception:
+            text = "Nie można przerobić obrazka"
             emb = jb2.embed.error_embed(message.author.mention, text)
             await client.send_message(message.channel, embed=emb)
