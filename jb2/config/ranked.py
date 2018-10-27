@@ -63,7 +63,7 @@ class ExpCommand(jb2.command.Command):
 
 
 def get_lvl_from_exp(exp):
-    current_lvl = 0
+    current_lvl = -1
     while get_required_exp(current_lvl) <= exp:
         current_lvl += 1
     return current_lvl
@@ -74,9 +74,6 @@ def get_required_exp(lvl):
         return 0
     if lvl == 0:
         return 1
-    current_lvl = 1
-    required_exp = 100
-    while lvl > current_lvl:
-        current_lvl += 1
-        required_exp = (current_lvl ** 1.1) * 150
-    return int(required_exp)
+    if lvl == 1:
+        return 100 + get_required_exp(lvl - 1)
+    return get_required_exp(lvl - 1) + int((lvl ** 1.1) * 150)
