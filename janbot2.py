@@ -88,7 +88,7 @@ commands = (
     jb2.text.gejowo.GejowoCommand(connector),
     jb2.text.przondlo.PrzondloCommand(connector),
     jb2.text.szkaluje.SzkalujeCommand(connector),
-    #jb2.text.ufnal.UfnalCommand(connector)
+    jb2.text.ufnal.UfnalCommand(connector)
 )
 locked = {}
 
