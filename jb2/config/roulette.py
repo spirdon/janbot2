@@ -341,7 +341,7 @@ class RoleListener:
                         footer_text = "Zmień domyślny tekst za pomocą " +\
                                       prefix + "roulette texts " + \
                                       "<role_name>, <url>"
-                        desc = "Godzinny reminder, że <@{}> to **{}**!"
+                        desc = "Reminder, że <@{}> to **{}**!"
                         desc = desc.format(owner_id, role_name)
                         emb.set_footer(text=footer_text)
                     else:

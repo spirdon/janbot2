@@ -128,7 +128,7 @@ Poniższe komendy wymagają parametru URL albo dołączenia obrazka do wiadomoś
                 emb.description = """
 **`{0}ankieta <question>: <options>`** - postuje ankietę
 `question` - pytanie (musi po nim być dwukropek)
-`options` - odpowiedzi oddzielone znakiem plusa (+)
+`options` - odpowiedzi zaczynające się znakiem plusa (+)
 
 **`{0}kudo` <member>** - daje kudosa użytkownikowi
 `member` - wzmianka użytkownika, który ma dostać kudosa
