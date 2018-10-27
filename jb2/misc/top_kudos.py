@@ -13,6 +13,7 @@ class TopKudosCommand(jb2.command.Command):
         emb = discord.Embed()
 
         kudos = self.connector.get_kudos(server_id)
+        kudos = [k for k in kudos if k[2] != 0]
 
         desc = ''
         for kudo in kudos:

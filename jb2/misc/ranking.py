@@ -15,6 +15,7 @@ class RankingCommand(jb2.command.Command):
         emb = discord.Embed()
 
         ranks = self.connector.get_ranks(server_id)
+        ranks = [r for r in ranks if r[2] != 0]
 
         desc = ''
         for rank in ranks:
@@ -31,5 +32,3 @@ class RankingCommand(jb2.command.Command):
         emb.set_footer(text=footer_text, icon_url=message.author.avatar_url)
 
         await client.send_message(message.channel, embed=emb)
-
-
