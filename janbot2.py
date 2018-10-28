@@ -133,11 +133,15 @@ async def on_message(message):
         locked[message.author.id] = True
 
     # Process all commands (run them if regex is ok)
-    for command in commands:
-        await command.process(prefix, message, client)
+    try:
+        for command in commands:
+            await command.process(prefix, message, client)
+    except Exception as e:
+        print("# Error occured: " + str(e))
+    finally:
+        if msg.startswith(prefix):
+            locked[message.author.id] = False
 
-    if msg.startswith(prefix):
-        locked[message.author.id] = False
 
 
 def main():
