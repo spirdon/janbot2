@@ -45,7 +45,8 @@ class RouletteCommand(jb2.command.Command):
                 owner_id = [r[3] for r in roles if r[2] == role_name][0]
 
                 if owner_id:
-                    text = "Osoba z daną rolą jest już wylosowana"
+                    text = "Osoba z daną rolą jest już wylosowana (<@{}>)"
+                    text = text.format(owner_id)
                     emb = jb2.embed.error_embed(author_m, text)
                     await client.send_message(message.channel, embed=emb)
                     return
