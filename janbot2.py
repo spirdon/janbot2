@@ -123,7 +123,7 @@ async def on_message(message):
     if message.author.id not in locked:
         locked[message.author.id] = False
 
-    if locked[message.author.id]:
+    if locked[message.author.id] and msg.startswith(prefix):
         text = "Poczekaj aż poprzednia komenda się wykona"
         emb = jb2.embed.error_embed(message.author.mention, text)
         await client.send_message(message.channel, embed=emb)
