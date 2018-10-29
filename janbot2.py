@@ -22,6 +22,7 @@ import jb2.image.npc
 import jb2.image.sminem
 import jb2.info.channel
 import jb2.info.role
+import jb2.info.roles
 import jb2.info.server
 import jb2.help
 import jb2.misc.ankieta
@@ -72,6 +73,7 @@ commands = (
     jb2.image.sminem.SminemCommand(connector),
     jb2.info.channel.ChannelInfoCommand(connector),
     jb2.info.role.RoleInfoCommand(connector),
+    jb2.info.roles.RolesCommand(connector),
     jb2.info.server.ServerInfoCommand(connector),
     jb2.help.HelpCommand(connector),
     jb2.misc.ankieta.AnkietaCommand(connector),

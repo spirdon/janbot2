@@ -8,7 +8,7 @@ import jb2.embed
 
 class RoleInfoCommand(jb2.command.Command):
     def get_pattern(self):
-        return r'role( [a-zA-Z0-9_]+)?$'
+        return r'role( [a-zA-Z0-9_ ]+)?$'
 
     async def action(self, prefix, message, client):
         author_m = message.author.mention
